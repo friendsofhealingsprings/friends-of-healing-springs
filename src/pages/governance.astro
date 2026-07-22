@@ -1,0 +1,133 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Button from '../components/Button.astro';
+import {
+  governanceDocuments,
+  governanceDocumentsPath,
+  boardMembers,
+  meetingSummaries,
+} from '../data/content';
+import { contentDateIso, formatContentDateString, parseContentDate } from '../utils/date';
+
+const accountabilityCommitments = [
+  'Using donated resources responsibly and in support of our mission',
+  'Maintaining appropriate oversight through our Board of Directors',
+  'Making decisions that prioritize the preservation and enjoyment of Healing Springs Natural Area',
+  'Operating with honesty, integrity, and respect for the community we serve',
+  'Building lasting partnerships with residents, volunteers, donors, and community organizations',
+];
+---
+
+<BaseLayout
+  title="Transparency & Governance"
+  description="Learn how Friends of Healing Springs Natural Area is governed and view our commitment to transparency, accountability, and responsible stewardship."
+>
+  <PageHero
+    title="Transparency & Governance"
+    subtitle="Stewardship Built on Trust"
+  />
+
+  <Section background="white" padding="md">
+    <div class="mx-auto max-w-3xl space-y-5 text-lg leading-relaxed text-stone-700">
+      <p>
+        Friends of Healing Springs Natural Area, Inc. believes that protecting and preserving Healing Springs requires more than a passion for nature — it requires responsible leadership, transparency, and accountability to the community we serve.
+      </p>
+      <p>
+        As a nonprofit organization dedicated to the stewardship of Healing Springs Natural Area, we are committed to maintaining strong governance practices and operating with integrity in all that we do.
+      </p>
+      <p>
+        Our Board of Directors is responsible for ensuring that the organization fulfills its charitable mission, manages resources responsibly, and makes decisions that serve the long-term interests of the natural area and the surrounding community.
+      </p>
+      <p>
+        We believe that transparency builds trust. The following documents provide insight into our organizational structure, governance practices, and commitment to responsible stewardship.
+      </p>
+    </div>
+  </Section>
+
+  <Section background="neutral">
+    <SectionHeading title="Our Governance Documents" />
+    <div class="grid gap-6 md:grid-cols-3">
+      {
+        governanceDocuments.map((doc) => (
+          <article class="brand-card flex flex-col p-6">
+            <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-brand bg-teal-100 text-teal-700">
+              <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a2.25 2.25 0 00-2.25-2.25h-4.5A2.25 2.25 0 0010.5 4.5v2.625m8.25 3h-7.5m7.5 0v7.875a2.25 2.25 0 01-2.25 2.25H7.875a2.25 2.25 0 01-2.25-2.25V9.75m7.5 0H9.375" />
+              </svg>
+            </div>
+            <h3 class="font-serif text-xl font-semibold text-forest-800">{doc.title}</h3>
+            <p class="mt-3 flex-1 text-sm leading-relaxed text-stone-600">{doc.description}</p>
+            <div class="mt-6">
+              <Button
+                href={`${governanceDocumentsPath}/${doc.filename}`}
+                variant="outline"
+                size="sm"
+                external
+              >
+                {doc.linkLabel}
+              </Button>
+            </div>
+          </article>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section background="white">
+    <SectionHeading title="Board of Directors" subtitle="Officers and directors of Friends of Healing Springs Natural Area, Inc." />
+    <div class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+      {
+        boardMembers.map((member) => (
+          <div class="brand-card p-6">
+            <h3 class="font-serif font-semibold text-forest-800">{member.name}</h3>
+            <p class="mt-1 text-sm font-medium text-teal-700">{member.role}</p>
+            {member.bio && <p class="mt-2 text-sm text-stone-600">{member.bio}</p>}
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <Section background="spring">
+    <SectionHeading title="Commitment to Accountability" />
+    <div class="mx-auto max-w-3xl">
+      <ul class="space-y-4">
+        {
+          accountabilityCommitments.map((item) => (
+            <li class="flex gap-3 text-stone-700">
+              <span class="mt-2 h-2 w-2 flex-shrink-0 rounded-full bg-teal-600" aria-hidden="true" />
+              <span class="leading-relaxed">{item}</span>
+            </li>
+          ))
+        }
+      </ul>
+      <p class="mt-10 text-lg leading-relaxed text-stone-700">
+        Thank you for supporting our mission and helping us preserve Healing Springs for current and future generations.
+      </p>
+    </div>
+  </Section>
+
+  <Section background="white">
+    <SectionHeading title="Meeting Summaries" subtitle="Public summaries of board meetings and organizational decisions." />
+    <div class="space-y-6">
+      {
+        meetingSummaries.length > 0 ? (
+          meetingSummaries.map((meeting) => (
+            <article class="brand-card p-6">
+              <time datetime={contentDateIso(parseContentDate(meeting.date))} class="text-sm text-stone-500">
+                {formatContentDateString(meeting.date)}
+              </time>
+              <h3 class="mt-1 font-serif text-lg font-semibold text-forest-800">{meeting.title}</h3>
+              <p class="mt-2 text-stone-600">{meeting.summary}</p>
+            </article>
+          ))
+        ) : (
+          <p class="text-stone-600">Meeting summaries will be posted here as they become available.</p>
+        )
+      }
+    </div>
+  </Section>
+</BaseLayout>

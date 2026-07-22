@@ -1,0 +1,80 @@
+---
+import { footerNav } from '../data/navigation';
+import OrganizationName from './OrganizationName.astro';
+import { site, mission, taxStatusLabel } from '../data/site';
+---
+
+<footer class="border-t border-forest-800 bg-forest-800 text-sand-100">
+  <div class="mx-auto max-w-content px-4 py-16 sm:px-6 lg:px-8">
+    <div class="grid gap-12 md:grid-cols-2 lg:grid-cols-3">
+      <div>
+        <div class="flex items-center gap-3">
+          <img
+            src="/brand/logo/logo-icon-light.svg"
+            alt=""
+            class="h-10 w-10"
+            width="40"
+            height="40"
+            aria-hidden="true"
+          />
+          <div>
+            <OrganizationName variant="footer" />
+          </div>
+        </div>
+        <p class="mt-4 text-sm leading-relaxed text-sand-200/90">{mission}</p>
+        <p class="mt-4 text-sm text-stone-300">
+          {site.location} · {taxStatusLabel}
+        </p>
+      </div>
+
+      <div>
+        <h3 class="font-serif text-sm font-semibold uppercase tracking-wider text-teal-200">
+          Quick Links
+        </h3>
+        <ul class="mt-4 grid grid-cols-2 gap-2">
+          {
+            footerNav.map((item) => (
+              <li>
+                <a
+                  href={item.href}
+                  class="text-sm text-sand-200 no-underline transition-colors hover:text-white"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div>
+        <h3 class="font-serif text-sm font-semibold uppercase tracking-wider text-teal-200">
+          Contact
+        </h3>
+        <ul class="mt-4 space-y-2 text-sm text-sand-200">
+          <li>
+            <a href={`mailto:${site.email}`} class="no-underline transition-colors hover:text-white">
+              {site.email}
+            </a>
+          </li>
+          <li>
+            <a href="/contact/" class="no-underline transition-colors hover:text-white">
+              Contact Form
+            </a>
+          </li>
+          <li>
+            <a href="/get-involved/" class="no-underline transition-colors hover:text-white">
+              Volunteer Opportunities
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="brand-divider mt-12 border-t pt-8 text-center text-sm text-stone-300">
+      <p>
+        &copy; {new Date().getFullYear()} {site.name} All rights reserved.
+      </p>
+    </div>
+  </div>
+</footer>

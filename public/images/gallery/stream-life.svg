@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#89c4d6"/>
+  <ellipse cx="400" cy="400" rx="350" ry="60" fill="#3988a3" opacity="0.5"/>
+  <circle cx="350" cy="380" r="8" fill="#243521" opacity="0.3"/>
+  <circle cx="450" cy="390" r="6" fill="#243521" opacity="0.3"/>
+  <text x="400" y="550" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#2d5a6f" opacity="0.6">stream-life.jpg</text>
+</svg>

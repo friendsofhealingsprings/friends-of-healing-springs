@@ -1,0 +1,35 @@
+---
+interface Props {
+  class?: string;
+  id?: string;
+  background?: 'white' | 'neutral' | 'forest' | 'spring' | 'sand';
+  padding?: 'sm' | 'md' | 'lg';
+}
+
+const {
+  class: className = '',
+  id,
+  background = 'white',
+  padding = 'lg',
+} = Astro.props;
+
+const backgrounds = {
+  white: 'bg-base',
+  neutral: 'bg-sand-50',
+  sand: 'bg-sand-100',
+  forest: 'bg-forest-700 text-white',
+  spring: 'bg-water-50',
+};
+
+const paddings = {
+  sm: 'py-12',
+  md: 'py-16',
+  lg: 'py-20 md:py-28',
+};
+---
+
+<section id={id} class:list={[backgrounds[background], paddings[padding], className]}>
+  <div class="mx-auto max-w-content px-4 sm:px-6 lg:px-8">
+    <slot />
+  </div>
+</section>

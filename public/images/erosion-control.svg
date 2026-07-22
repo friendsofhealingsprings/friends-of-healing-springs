@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#a97d57"/>
+  <path d="M0 400 L1200 350 L1200 800 L0 800 Z" fill="#835441"/>
+  <path d="M100 600 Q400 500 700 550 T1100 520 L1100 800 L100 800 Z" fill="#3988a3" opacity="0.6"/>
+  <rect x="300" y="300" width="600" height="20" fill="#6b4639" opacity="0.5" transform="rotate(-5 600 310)"/>
+  <text x="600" y="720" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#f9f6f1" opacity="0.8">Erosion Control</text>
+  <text x="600" y="755" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#f0e9de" opacity="0.6">Replace with photo: erosion-control.jpg</text>
+</svg>

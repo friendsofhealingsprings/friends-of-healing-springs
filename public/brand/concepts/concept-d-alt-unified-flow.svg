@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <title>Concept D Alt - Unified Flow and Fish</title>
+  <!-- Single continuous stroke: stream rises into fish form, exits as flow -->
+  <path
+    d="M4 38C12 34 16 30 14 26C12 22 18 18 26 18C32 18 36 21 34 24C32 27 24 28 16 27C13 26 12 26 12 26M12 26L7 22M12 26L7 30M18 27C26 30 34 32 44 34"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+  <circle cx="31" cy="21" r="1.5" fill="currentColor"/>
+</svg>

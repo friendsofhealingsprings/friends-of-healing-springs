@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import GalleryGrid from '../components/GalleryGrid.astro';
+import { images } from '../data/images';
+---
+
+<BaseLayout
+  title="Photo Gallery"
+  description="Photos of Healing Springs Natural Area — Little Osage Creek, spring-fed waters, forest, wildlife, restoration, and volunteer stewardship in Northwest Arkansas."
+>
+  <PageHero
+    title="Photo Gallery"
+    subtitle="Images from Healing Springs Natural Area and our stewardship activities."
+    image={images.forestCanopy}
+    imageAlt="Forest at Healing Springs Natural Area"
+  />
+
+  <Section background="white">
+    <GalleryGrid />
+  </Section>
+</BaseLayout>

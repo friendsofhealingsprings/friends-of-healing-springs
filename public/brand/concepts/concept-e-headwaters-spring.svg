@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <title>Concept E - Headwaters Spring</title>
+  <!-- Spring source -->
+  <circle cx="24" cy="8" r="2" fill="currentColor"/>
+  <path d="M24 10V14" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- Watershed tributaries converging -->
+  <path d="M8 12L20 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+  <path d="M40 12L28 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.45"/>
+  <!-- Main stream -->
+  <path
+    d="M24 18C24 22 20 26 22 30C24 34 28 36 26 40"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <!-- Darter profile -->
+  <path
+    d="M18 32C21 30 26 30 28 32C27 34 23 34 20 33C19 33 18 32 18 32"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+  <path d="M18 32L14 30M18 32L14 34" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <path d="M22 33C23 35 24 35 25 34" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" opacity="0.7"/>
+  <circle cx="26" cy="31.5" r="1" fill="currentColor"/>
+</svg>

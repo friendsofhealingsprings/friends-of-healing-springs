@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <title>Concept K - Current</title>
+  <!-- Single flow line -->
+  <path
+    d="M0 30C12 26 24 34 36 28C42 25 46 27 48 26"
+    stroke="currentColor"
+    stroke-width="2"
+    fill="none"
+  />
+  <!-- Fish: solid lens silhouette, integrated tail -->
+  <path
+    d="M20 16C28 14 38 18 38 22C38 26 28 28 20 24C18 22 18 18 20 16Z"
+    fill="currentColor"
+  />
+</svg>

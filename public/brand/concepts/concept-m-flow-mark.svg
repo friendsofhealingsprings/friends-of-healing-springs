@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <title>Concept M - Flow Mark</title>
+  <path
+    d="M0 28C12 28 12 36 24 36C36 36 36 28 48 28"
+    stroke="currentColor"
+    stroke-width="2"
+    fill="none"
+  />
+  <path
+    d="M20 16C28 14 36 16 38 20C36 24 28 24 20 20C19 18 19 17 20 16Z"
+    fill="currentColor"
+  />
+</svg>

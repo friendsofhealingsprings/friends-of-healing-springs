@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#344f2e"/>
+  <path d="M0 400 L800 380 L800 600 L0 600 Z" fill="#2b4027"/>
+  <line x1="100" y1="600" x2="120" y2="200" stroke="#1a2a18" stroke-width="15"/>
+  <line x1="400" y1="600" x2="410" y2="150" stroke="#1a2a18" stroke-width="18"/>
+  <line x1="650" y1="600" x2="640" y2="220" stroke="#1a2a18" stroke-width="14"/>
+  <text x="400" y="550" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#a0ba96" opacity="0.6">forest-trail.jpg</text>
+</svg>

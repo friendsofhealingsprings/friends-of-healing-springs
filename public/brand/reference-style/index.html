@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brand Identity — Reference Style</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Source+Serif+4:wght@600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --spring-blue: #1F6F8B;
+      --watershed-teal: #2A9D8F;
+      --forest: #2F5D50;
+      --ozark: #4C6B3C;
+      --sandstone: #D9D2C3;
+      --stone: #8C8579;
+      --off-white: #F7F6F2;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Inter, system-ui, sans-serif;
+      background: var(--off-white);
+      color: var(--forest);
+      padding: 2.5rem 2rem 3rem;
+      line-height: 1.5;
+    }
+    .sheet { max-width: 920px; margin: 0 auto; }
+    h1 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+    .lead { color: var(--stone); font-size: 0.88rem; margin-bottom: 2rem; }
+    h2 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      padding-bottom: 0.35rem;
+      border-bottom: 1px solid var(--sandstone);
+    }
+    .section { margin-bottom: 2.25rem; }
+    .concepts {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+    @media (max-width: 720px) { .concepts { grid-template-columns: 1fr; } }
+    .concept {
+      background: #fff;
+      border: 1px solid var(--sandstone);
+      border-radius: 6px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .concept img, .concept svg { width: 120px; height: 120px; display: block; margin: 0 auto 0.75rem; }
+    .concept .label {
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--stone);
+      margin-bottom: 0.2rem;
+    }
+    .concept h3 {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 0.85rem;
+      margin-bottom: 0.5rem;
+    }
+    .concept p { font-size: 0.75rem; color: var(--stone); line-height: 1.45; }
+    .recommended { border-color: var(--forest); border-width: 2px; }
+    .recommended .label { color: var(--forest); }
+    .lockups {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    @media (max-width: 640px) { .lockups { grid-template-columns: 1fr; } }
+    .lockup {
+      background: #fff;
+      border: 1px solid var(--sandstone);
+      border-radius: 6px;
+      padding: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100px;
+    }
+    .lockup img, .lockup svg { max-width: 100%; height: auto; }
+    .lockup-label {
+      font-size: 0.68rem;
+      color: var(--stone);
+      text-align: center;
+      margin-top: 0.4rem;
+    }
+    .lockup-wrap { margin-bottom: 0.5rem; }
+    .palette {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+      gap: 0.75rem;
+    }
+    .swatch {
+      border-radius: 4px;
+      overflow: hidden;
+      border: 1px solid var(--sandstone);
+    }
+    .swatch-color { height: 48px; }
+    .swatch-info {
+      padding: 0.4rem 0.5rem;
+      background: #fff;
+      font-size: 0.65rem;
+    }
+    .swatch-info strong { display: block; font-size: 0.68rem; color: var(--forest); }
+    .swatch-info code { color: var(--stone); font-size: 0.62rem; }
+    .type-row { margin-bottom: 0.75rem; }
+    .type-row .name { font-size: 0.7rem; color: var(--stone); margin-bottom: 0.15rem; }
+    .type-serif { font-family: 'Source Serif 4', Georgia, serif; font-size: 1.25rem; font-weight: 600; }
+    .type-sans { font-family: Inter, system-ui, sans-serif; font-size: 0.95rem; }
+    .mission {
+      font-family: 'Source Serif 4', Georgia, serif;
+      font-size: 0.95rem;
+      font-style: italic;
+      color: var(--forest);
+      max-width: 36rem;
+      margin-bottom: 1rem;
+    }
+    .icons { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .icon-item { text-align: center; color: var(--forest); }
+    .icon-item svg { width: 32px; height: 32px; display: block; margin: 0 auto 0.35rem; }
+    .icon-item span { font-size: 0.65rem; color: var(--stone); }
+  </style>
+</head>
+<body>
+  <div class="sheet">
+    <h1>Friends of Healing Springs Natural Area</h1>
+    <p class="lead">Brand identity · reference style · conservation-grade</p>
+
+    <section class="section">
+      <h2>Logo Concepts</h2>
+      <div class="concepts">
+        <div class="concept recommended">
+          <img src="concept-a-spring-emergence.svg" alt="Concept A — Spring Emergence" width="120" height="120"/>
+          <p class="label">Concept A · Recommended</p>
+          <h3>Spring Emergence</h3>
+          <p>Spring source feeds a cliff-edge waterfall into a pool below. Watershed hills frame the falls; fish marks healthy downstream habitat.</p>
+        </div>
+        <div class="concept">
+          <img src="concept-b-watershed-contour.svg" alt="Concept B — Watershed Contour" width="120" height="120"/>
+          <p class="label">Concept B</p>
+          <h3>Watershed Contour</h3>
+          <p>Topographic contours form a basin. Spring origin cascades over a ledge as a waterfall, continuing to stream and fish below.</p>
+        </div>
+        <div class="concept">
+          <img src="concept-c-stream-path-s.svg" alt="Concept C — Stream Path S" width="120" height="120"/>
+          <p class="label">Concept C</p>
+          <h3>Stream Path S</h3>
+          <p>Spring waterfall at headwaters feeds a flowing S-shaped stream. Fish and habitat branch mark connection and movement.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Recommended Direction — Spring Emergence</h2>
+      <div class="lockups">
+        <div class="lockup-wrap">
+          <div class="lockup"><img src="logo-horizontal.svg" alt="Horizontal logo" style="max-height:56px"/></div>
+          <p class="lockup-label">Full Logo — Horizontal</p>
+        </div>
+        <div class="lockup-wrap">
+          <div class="lockup"><img src="logo-stacked.svg" alt="Stacked logo" style="max-height:110px"/></div>
+          <p class="lockup-label">Full Logo — Stacked</p>
+        </div>
+        <div class="lockup-wrap">
+          <div class="lockup"><img src="concept-a-spring-emergence.svg" alt="Icon only" style="width:80px;height:80px"/></div>
+          <p class="lockup-label">Icon Only</p>
+        </div>
+        <div class="lockup-wrap">
+          <div class="lockup"><img src="logo-single-color.svg" alt="Single color logo" style="max-height:56px;color:#2F5D50"/></div>
+          <p class="lockup-label">Alternate Single Color</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Color Palette</h2>
+      <div class="palette">
+        <div class="swatch"><div class="swatch-color" style="background:#1F6F8B"></div><div class="swatch-info"><strong>Spring Water Blue</strong><code>#1F6F8B</code></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#2A9D8F"></div><div class="swatch-info"><strong>Watershed Teal</strong><code>#2A9D8F</code></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#2F5D50"></div><div class="swatch-info"><strong>Forest Green</strong><code>#2F5D50</code></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#4C6B3C"></div><div class="swatch-info"><strong>Ozark Green</strong><code>#4C6B3C</code></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#D9D2C3"></div><div class="swatch-info"><strong>Sandstone</strong><code>#D9D2C3</code></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#8C8579"></div><div class="swatch-info"><strong>Stone Gray</strong><code>#8C8579</code></div></div>
+        <div class="swatch"><div class="swatch-color" style="background:#F7F6F2;border-bottom:1px solid #D9D2C3"></div><div class="swatch-info"><strong>Off White</strong><code>#F7F6F2</code></div></div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Typography</h2>
+      <div class="type-row">
+        <p class="name">Headings / Mission — Source Serif 4</p>
+        <p class="type-serif">Protect and restore a spring-fed watershed</p>
+      </div>
+      <div class="type-row">
+        <p class="name">Body / UI / Navigation — Inter</p>
+        <p class="type-sans">Conservation, education, and stewardship across Northwest Arkansas.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2>Brand Essence</h2>
+      <p class="mission">"Protect and restore a spring-fed watershed ecosystem through conservation, education, and stewardship."</p>
+      <div class="icons">
+        <div class="icon-item">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M16 6C16 6 10 14 10 20a6 6 0 1012 0c0-6-6-14-6-14z" stroke="currentColor" stroke-width="1.5"/></svg>
+          <span>Water</span>
+        </div>
+        <div class="icon-item">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M16 26V14M16 14C16 14 10 12 10 8C10 12 16 14 16 14C16 14 22 12 22 8C22 12 16 14 16 14Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span>Habitat</span>
+        </div>
+        <div class="icon-item">
+          <svg viewBox="0 0 32 32" fill="none"><path d="M10 22h12M12 18h8M14 14h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          <span>Geology</span>
+        </div>
+        <div class="icon-item">
+          <svg viewBox="0 0 32 32" fill="none"><circle cx="12" cy="14" r="3" stroke="currentColor" stroke-width="1.25"/><circle cx="20" cy="14" r="3" stroke="currentColor" stroke-width="1.25"/><path d="M8 24c2-3 14-3 16 0" stroke="currentColor" stroke-width="1.25"/></svg>
+          <span>Stewardship</span>
+        </div>
+      </div>
+    </section>
+  </div>
+</body>
+</html>

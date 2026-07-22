@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#c7d7c1"/>
+  <circle cx="200" cy="450" r="30" fill="#547d47"/>
+  <circle cx="350" cy="440" r="35" fill="#406338"/>
+  <circle cx="500" cy="455" r="28" fill="#547d47"/>
+  <circle cx="620" cy="445" r="32" fill="#406338"/>
+  <rect x="0" y="500" width="800" height="100" fill="#759a68"/>
+  <text x="400" y="550" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#243521" opacity="0.6">native-planting.jpg</text>
+</svg>

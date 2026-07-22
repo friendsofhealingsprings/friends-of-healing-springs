@@ -1,0 +1,40 @@
+---
+interface Props {
+  icon: 'water' | 'habitat' | 'species' | 'community';
+}
+
+const { icon } = Astro.props;
+---
+
+<div class="mb-4 flex h-12 w-12 items-center justify-center rounded-brand bg-teal-100 text-teal-700">
+  {
+    icon === 'water' && (
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 3c-1.5 2.5-4.5 6.5-4.5 10a4.5 4.5 0 109 0c0-3.5-3-7.5-4.5-10z" />
+      </svg>
+    )
+  }
+  {
+    icon === 'habitat' && (
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 21c-4-4-8-7.5-8-12a8 8 0 1116 0c0 4.5-4 8-8 12z" />
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 11a2 2 0 100-4 2 2 0 000 4z" />
+      </svg>
+    )
+  }
+  {
+    icon === 'species' && (
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M4 12c2-3 5-5 8-5s6 2 8 5c-2 3-5 5-8 5s-6-2-8-5z" />
+        <circle cx="12" cy="12" r="2" />
+      </svg>
+    )
+  }
+  {
+    icon === 'community' && (
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    )
+  }
+</div>

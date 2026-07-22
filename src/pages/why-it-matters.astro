@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { images } from '../data/images';
+import { whyItMattersSections } from '../data/content';
+---
+
+<BaseLayout
+  title="Why It Matters"
+  description="Why Healing Springs Natural Area ranks among Arkansas's most significant aquatic sites — rare darters, spring-fed habitat, watershed stewardship, and sensitive species documented at the March 2026 partners meeting."
+>
+  <PageHero
+    title="Why It Matters"
+    subtitle="Rare fish, spring-fed water, and a watershed that requires careful stewardship — as documented by Arkansas Natural Heritage Commission partners at Healing Springs Natural Area."
+    image={images.healingSpringsStream}
+    imageAlt="Spring-fed stream at Healing Springs Natural Area"
+  />
+
+  {
+    whyItMattersSections.map((section, index) => (
+      <Section background={index % 2 === 0 ? 'white' : 'neutral'} id={section.id}>
+        <div class:list={['grid items-center gap-12 lg:grid-cols-2', index % 2 === 1 && 'lg:grid-flow-dense']}>
+          <div class:list={[index % 2 === 1 && 'lg:col-start-2']}>
+            <SectionHeading title={section.title} subtitle={section.subtitle} />
+            <ul class="space-y-4">
+              {section.points.map((point) => (
+                <li class="flex gap-3 text-stone-700">
+                  <span class="mt-1.5 h-2 w-2 flex-shrink-0 rounded-full bg-teal-600" aria-hidden="true" />
+                  <span class="leading-relaxed">{point}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class:list={['overflow-hidden rounded-brand border border-stone-200', index % 2 === 1 && 'lg:col-start-1 lg:row-start-1']}>
+            <img
+              src={section.image}
+              alt={section.imageAlt}
+              class="h-full w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+      </Section>
+    ))
+  }
+
+  <Section background="forest">
+    <div class="mx-auto max-w-3xl text-center">
+      <SectionHeading
+        title="Protecting What Cannot Be Replaced"
+        subtitle="Healing Springs Natural Area holds roughly 0.87 miles of Least and Arkansas Darter habitat, fed by Fulbright Spring and Healing Spring. Erosion, sedimentation, and riparian disturbance can permanently alter conditions these species cannot survive without. Stewardship today protects a resource of statewide importance."
+        centered
+        light
+      />
+    </div>
+  </Section>
+</BaseLayout>

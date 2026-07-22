@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Button from '../components/Button.astro';
+import { images } from '../data/images';
+---
+
+<BaseLayout
+  title="Get Involved"
+  description="Volunteer opportunities, stewardship activities, and ways to support Friends of Healing Springs Natural Area, Inc. in Northwest Arkansas."
+>
+  <PageHero
+    title="Get Involved"
+    subtitle="Join our community of stewards protecting Healing Springs Natural Area and the Little Osage Creek watershed."
+    image={images.volunteerWork}
+    imageAlt="Volunteers at a stewardship workday"
+  />
+
+  <Section background="white">
+    <SectionHeading
+      title="Volunteer Opportunities"
+      subtitle="Hands-on stewardship is at the heart of our conservation work."
+    />
+    <div class="grid gap-8 lg:grid-cols-2">
+      <div class="space-y-6">
+        <div class="brand-card p-6">
+          <h3 class="font-serif text-lg font-semibold text-forest-800">Trail Stewardship Workdays</h3>
+          <p class="mt-2 text-sm text-stone-600">
+            Help maintain trails, install erosion controls, and keep access routes safe while minimizing impact to sensitive habitats.
+          </p>
+        </div>
+        <div class="brand-card p-6">
+          <h3 class="font-serif text-lg font-semibold text-forest-800">Habitat Restoration</h3>
+          <p class="mt-2 text-sm text-stone-600">
+            Participate in native plantings, invasive species removal, and riparian buffer restoration along Little Osage Creek and its spring-fed tributaries.
+          </p>
+        </div>
+        <div class="brand-card p-6">
+          <h3 class="font-serif text-lg font-semibold text-forest-800">Site Cleanup & Monitoring</h3>
+          <p class="mt-2 text-sm text-stone-600">
+            Join litter cleanup events and assist with basic site monitoring to support watershed health documentation.
+          </p>
+        </div>
+      </div>
+      <div>
+        <img
+          src={images.volunteerWork}
+          alt="Volunteers participating in conservation work"
+          class="rounded-brand border border-stone-200"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </Section>
+
+  <Section background="neutral">
+    <SectionHeading title="What Stewardship Means Here" />
+    <div class="prose-custom max-w-none text-stone-700">
+      <p>
+        Stewardship at Healing Springs Natural Area means caring for a public natural area with respect for its ecological sensitivity and the authority of managing agencies. Volunteers work under organizational guidance and in coordination with approved activities.
+      </p>
+      <p>
+        No experience is required for most workdays. We provide orientation, safety briefings, and tools. What we ask is a willingness to learn, follow guidance, and treat this place with care.
+      </p>
+    </div>
+  </Section>
+
+  <Section background="white">
+    <div class="grid gap-12 lg:grid-cols-2">
+      <div>
+        <SectionHeading title="Volunteer Inquiry" subtitle="Tell us about your interest in volunteering." />
+        <ContactForm
+          id="volunteer-form"
+          formType="volunteer"
+          title="Volunteer Sign-Up"
+          submitLabel="Express Interest"
+        />
+      </div>
+      <div>
+        <SectionHeading title="Partnership Inquiries" subtitle="Organizations, agencies, and funders welcome." />
+        <ContactForm
+          id="partnership-form"
+          formType="partnership"
+          title="Partnership Inquiry"
+          submitLabel="Send Inquiry"
+          note="For grant partnerships, agency collaboration, or corporate sponsorship inquiries."
+        />
+      </div>
+    </div>
+  </Section>
+
+  <Section background="spring">
+    <div class="mx-auto max-w-2xl text-center">
+      <SectionHeading
+        title="Support Our Work"
+        subtitle="Tax-deductible contributions fund conservation, restoration, and volunteer stewardship at Healing Springs Natural Area."
+        centered
+      />
+      <Button href="/donate/" variant="primary" size="lg">
+        Donate
+      </Button>
+    </div>
+  </Section>
+</BaseLayout>

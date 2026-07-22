@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Section from '../../components/Section.astro';
+import { getCollection } from 'astro:content';
+import { contentDateIso, formatContentDate } from '../../utils/date';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts', ({ data }) => !data.draft);
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+const formattedDate = formatContentDate(post.data.pubDate);
+---
+
+<BaseLayout title={post.data.title} description={post.data.description} image={post.data.image}>
+  <article>
+    {
+      post.data.image && (
+        <div class="relative h-64 overflow-hidden md:h-80">
+          <img
+            src={post.data.image}
+            alt={post.data.imageAlt ?? post.data.title}
+            class="h-full w-full object-cover"
+          />
+          <div class="absolute inset-0 bg-forest-950/40" />
+        </div>
+      )
+    }
+
+    <Section background="white" padding="md">
+      <div class="mx-auto max-w-3xl">
+        <a href="/news/" class="text-sm font-medium text-water-700 no-underline hover:text-water-800">
+          ← Back to News
+        </a>
+        <header class="mt-6">
+          <time datetime={contentDateIso(post.data.pubDate)} class="text-sm text-stone-500">
+            {formattedDate}
+          </time>
+          <h1 class="mt-2 font-serif text-4xl font-semibold text-forest-800">{post.data.title}</h1>
+          <p class="mt-4 text-lg text-stone-600">{post.data.description}</p>
+          <p class="mt-2 text-sm text-stone-500">By {post.data.author}</p>
+        </header>
+        <div class="prose-custom mt-10">
+          <Content />
+        </div>
+      </div>
+    </Section>
+  </article>
+</BaseLayout>

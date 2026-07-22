@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600" viewBox="0 0 800 600">
+  <rect width="800" height="600" fill="#e8e6df"/>
+  <rect x="0" y="450" width="800" height="150" fill="#759a68"/>
+  <circle cx="250" cy="380" r="35" fill="#b8926d"/>
+  <circle cx="400" cy="370" r="35" fill="#a97d57"/>
+  <circle cx="550" cy="385" r="35" fill="#b8926d"/>
+  <text x="400" y="550" text-anchor="middle" font-family="Arial, sans-serif" font-size="14" fill="#406338" opacity="0.6">volunteer-group.jpg</text>
+</svg>

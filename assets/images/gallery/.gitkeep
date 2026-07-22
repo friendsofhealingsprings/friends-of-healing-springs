@@ -1,0 +1,12 @@
+# Gallery originals
+
+Place full-resolution photos here. The build process compresses them into `public/images/gallery/` automatically.
+
+Supported formats: `.jpg`, `.jpeg`, `.png`, `.webp`
+
+After adding new photos:
+```bash
+npm run compress-images
+```
+
+Or they will be compressed automatically when you run `npm run build`.

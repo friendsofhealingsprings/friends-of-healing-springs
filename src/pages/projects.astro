@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { images } from '../data/images';
+import { projects } from '../data/projects';
+---
+
+<BaseLayout
+  title="Projects"
+  description="Conservation projects at Healing Springs Natural Area including erosion control, habitat restoration, trail stewardship, volunteer workdays, and watershed protection."
+>
+  <PageHero
+    title="Conservation Projects"
+    subtitle="Current and planned stewardship initiatives for Healing Springs Natural Area and the Little Osage Creek watershed."
+    image={images.erosionControl}
+    imageAlt="Conservation work along Little Osage Creek"
+  />
+
+  <Section background="white">
+    <SectionHeading
+      title="Active & Planned Projects"
+      subtitle="Each project is structured for future expansion with status tracking, funding documentation, and grant reporting support."
+    />
+    <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+      {projects.map((project) => <ProjectCard project={project} />)}
+    </div>
+  </Section>
+
+  <Section background="neutral">
+    <div class="mx-auto max-w-3xl text-center">
+      <SectionHeading
+        title="Grant & Funding Transparency"
+        subtitle="Project data in this section is designed to support future grant reporting and donor accountability."
+        centered
+      />
+      <p class="text-stone-700">
+        As projects advance, this page will include detailed budgets, timelines, outcomes, and reporting documentation. Contact us for partnership or funding inquiries.
+      </p>
+    </div>
+  </Section>
+</BaseLayout>

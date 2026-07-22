@@ -1,0 +1,44 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+import Section from '../../components/Section.astro';
+import PostPreview from '../../components/PostPreview.astro';
+import { images } from '../../data/images';
+import { getCollection } from 'astro:content';
+import { sortPostsByDateDesc } from '../../utils/posts';
+
+const posts = sortPostsByDateDesc(await getCollection('posts', ({ data }) => !data.draft));
+---
+
+<BaseLayout
+  title="News & Updates"
+  description="Latest news and updates from Friends of Healing Springs Natural Area, Inc. — stewardship planning, partner meetings, and volunteer coordination."
+>
+  <PageHero
+    title="News & Updates"
+    subtitle="Stories from our conservation work, community partnerships, and volunteer activities."
+    image={images.volunteerWork}
+    imageAlt="Community volunteers at Healing Springs"
+  />
+
+  <Section background="white">
+    {
+      posts.length > 0 ? (
+        <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => (
+            <PostPreview
+              title={post.data.title}
+              description={post.data.description}
+              href={`/news/${post.slug}/`}
+              date={post.data.pubDate}
+              image={post.data.image}
+              imageAlt={post.data.imageAlt}
+            />
+          ))}
+        </div>
+      ) : (
+        <p class="text-center text-stone-600">No updates published yet. Check back soon.</p>
+      )
+    }
+  </Section>
+</BaseLayout>

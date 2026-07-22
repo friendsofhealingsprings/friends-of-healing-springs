@@ -1,0 +1,56 @@
+---
+import Button from './Button.astro';
+
+interface Props {
+  headline: string;
+  subheadline: string;
+  image: string;
+  imageAlt: string;
+  primaryCta?: { label: string; href: string };
+  secondaryCta?: { label: string; href: string };
+}
+
+const {
+  headline,
+  subheadline,
+  image,
+  imageAlt,
+  primaryCta = { label: 'Learn More', href: '/about/' },
+  secondaryCta = { label: 'Support Us', href: '/donate/' },
+} = Astro.props;
+---
+
+<section class="relative min-h-[70vh] overflow-hidden">
+  <div class="absolute inset-0">
+    <img
+      src={image}
+      alt={imageAlt}
+      class="h-full w-full object-cover"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-forest-900/90 via-forest-800/75 to-forest-800/45"></div>
+  </div>
+
+  <div class="relative mx-auto flex min-h-[70vh] max-w-content items-center px-4 py-24 sm:px-6 lg:px-8">
+    <div class="max-w-2xl">
+      <p class="mb-4 text-sm font-medium uppercase tracking-widest text-teal-300">
+        Spring-fed watershed · Northwest Arkansas
+      </p>
+      <h1 class="font-serif text-4xl font-semibold leading-tight text-white md:text-5xl lg:text-6xl">
+        {headline}
+      </h1>
+      <p class="mt-6 text-lg leading-relaxed text-base-100 md:text-xl">
+        {subheadline}
+      </p>
+      <div class="mt-10 flex flex-wrap gap-4">
+        <Button href={primaryCta.href} variant="primary" size="lg">
+          {primaryCta.label}
+        </Button>
+        <Button href={secondaryCta.href} variant="outline" size="lg" class="border-base-100/40 text-white hover:bg-white/10 hover:text-white">
+          {secondaryCta.label}
+        </Button>
+      </div>
+    </div>
+  </div>
+</section>

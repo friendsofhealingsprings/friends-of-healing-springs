@@ -1,0 +1,6 @@
+name = "friends-of-healing-springs"
+compatibility_date = "2024-09-23"
+pages_build_output_dir = "dist"
+
+# Local testing: copy .dev.vars.example to .dev.vars and run:
+#   npm run build && npx wrangler pages dev dist

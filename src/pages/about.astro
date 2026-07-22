@@ -1,0 +1,126 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import { images } from '../data/images';
+import { mission, vision, stewardshipPhilosophy } from '../data/site';
+---
+
+<BaseLayout
+  title="About"
+  description="Learn about Friends of Healing Springs Natural Area, Inc. — our mission, vision, stewardship philosophy, and partnership with Arkansas conservation agencies."
+>
+  <PageHero
+    title="About Us"
+    subtitle="A community-led Arkansas conservation nonprofit serving Healing Springs Natural Area and the Little Osage Creek watershed. Recognized by the IRS as a 501(c)(3) tax-exempt organization."
+    image={images.forestCanopy}
+    imageAlt="Forest canopy at Healing Springs Natural Area"
+  />
+
+  <Section background="white">
+    <div class="grid gap-12 lg:grid-cols-2">
+      <div>
+        <SectionHeading title="Mission" />
+        <p class="text-lg leading-relaxed text-stone-700">{mission}</p>
+      </div>
+      <div>
+        <SectionHeading title="Vision" />
+        <p class="text-lg leading-relaxed text-stone-700">{vision}</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section background="neutral">
+    <SectionHeading
+      title="Who We Are"
+      subtitle="Friends of Healing Springs Natural Area, Inc. was formed by community members committed to the long-term protection of this significant natural area in Highfill, Arkansas."
+    />
+    <div class="prose-custom max-w-none text-stone-700">
+      <p>
+        We are an Arkansas nonprofit corporation recognized by the IRS as a tax-exempt organization under Section 501(c)(3). Friends of Healing Springs Natural Area, Inc. brings together local residents, conservation professionals, and volunteers who share a commitment to responsible stewardship of Healing Springs Natural Area and the surrounding Little Osage Creek watershed.
+      </p>
+      <p>
+        As a newly formed organization, we are building the infrastructure—governance, partnerships, and volunteer programs—needed to support sustained conservation work. Our board provides oversight, transparency, and accountability in all organizational activities.
+      </p>
+    </div>
+  </Section>
+
+  <Section background="white">
+    <SectionHeading
+      title="Partnership with Arkansas Conservation Agencies"
+      subtitle="Collaborative conservation requires strong relationships with public agencies and scientific partners."
+    />
+    <div class="grid gap-8 lg:grid-cols-2">
+      <div class="prose-custom text-stone-700">
+        <p>
+          Friends of Healing Springs Natural Area, Inc. works in coordination with the <strong>Arkansas Natural Heritage Commission (ANHC)</strong> and other state conservation partners. ANHC manages Arkansas's System of Natural Areas, which includes Healing Springs Natural Area, and provides scientific expertise essential to informed stewardship.
+        </p>
+        <p>
+          Our organization complements agency management by mobilizing volunteers, pursuing grant funding for restoration projects, and serving as a community voice for watershed protection. We respect the regulatory framework governing public natural areas and operate as a supportive partner—not a replacement for agency authority.
+        </p>
+      </div>
+      <div class="brand-card border-l-4 border-l-teal-500 p-6">
+        <h3 class="font-serif text-lg font-semibold text-forest-800">Agency Collaboration Areas</h3>
+        <ul class="mt-4 space-y-3 text-sm text-stone-700">
+          <li class="flex gap-2">
+            <span class="text-teal-600">•</span>
+            Habitat assessment and stewardship planning
+          </li>
+          <li class="flex gap-2">
+            <span class="text-teal-600">•</span>
+            Volunteer coordination for approved activities
+          </li>
+          <li class="flex gap-2">
+            <span class="text-teal-600">•</span>
+            Environmental education and public outreach
+          </li>
+          <li class="flex gap-2">
+            <span class="text-teal-600">•</span>
+            Grant-funded restoration project implementation
+          </li>
+          <li class="flex gap-2">
+            <span class="text-teal-600">•</span>
+            Watershed health monitoring and reporting
+          </li>
+        </ul>
+      </div>
+    </div>
+  </Section>
+
+  <Section background="neutral">
+    <SectionHeading title="Stewardship Philosophy" />
+    <blockquote class="border-l-4 border-teal-500 pl-6">
+      <p class="text-xl italic leading-relaxed text-stone-700">{stewardshipPhilosophy}</p>
+    </blockquote>
+    <div class="mt-8 grid gap-6 sm:grid-cols-3">
+      <div class="brand-card p-6">
+        <h3 class="font-serif font-semibold text-forest-800">Science-Informed</h3>
+        <p class="mt-2 text-sm text-stone-600">Conservation decisions guided by ecological knowledge and professional expertise.</p>
+      </div>
+      <div class="brand-card p-6">
+        <h3 class="font-serif font-semibold text-forest-800">Collaborative</h3>
+        <p class="mt-2 text-sm text-stone-600">Working with agencies, landowners, and community members toward shared goals.</p>
+      </div>
+      <div class="brand-card p-6">
+        <h3 class="font-serif font-semibold text-forest-800">Transparent</h3>
+        <p class="mt-2 text-sm text-stone-600">Open governance and clear communication with donors, partners, and the public.</p>
+      </div>
+    </div>
+  </Section>
+
+  <Section background="white">
+    <SectionHeading
+      title="Community Role"
+      subtitle="Conservation succeeds when local communities are engaged as stewards, not just visitors."
+    />
+    <div class="prose-custom max-w-none text-stone-700">
+      <p>
+        Northwest Arkansas is one of the fastest-growing regions in the country. As development pressures increase, community-led conservation organizations play a vital role in protecting the natural resources that define our region's character and ecological health.
+      </p>
+      <p>
+        Friends of Healing Springs Natural Area, Inc. invites residents, educators, students, and outdoor enthusiasts to participate in caring for this natural area. Through volunteer workdays, educational programs, and advocacy for watershed protection, our community helps ensure that Healing Springs remains a healthy, accessible resource for future generations.
+      </p>
+    </div>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,143 @@
+---
+import Button from './Button.astro';
+import { donationConfig } from '../utils/donate';
+import { site, ein, taxDeductibilityNotice } from '../data/site';
+
+const showSuccess = Astro.url.searchParams.get('success') === '1';
+const showCanceled = Astro.url.searchParams.get('canceled') === '1';
+---
+
+<div class="mx-auto max-w-2xl" id="donate-section">
+  {
+    showSuccess && (
+      <div
+        class="mb-8 rounded-brand border border-teal-200 bg-teal-50 px-6 py-4 text-teal-900"
+        role="status"
+      >
+        <p class="font-semibold">Thank you for your support.</p>
+        <p class="mt-1 text-sm">
+          Your donation helps fund conservation, restoration, and stewardship at Healing Springs Natural Area.
+          Stripe will email a receipt for your records.
+        </p>
+      </div>
+    )
+  }
+
+  {
+    showCanceled && (
+      <div
+        class="mb-8 rounded-brand border border-stone-200 bg-sand-50 px-6 py-4 text-stone-700"
+        role="status"
+      >
+        <p class="font-semibold">Checkout canceled.</p>
+        <p class="mt-1 text-sm">No payment was processed. You can try again below or contact us with questions.</p>
+      </div>
+    )
+  }
+
+  <div class="text-center">
+    <div class="mb-6 inline-flex h-16 w-16 items-center justify-center rounded-brand bg-teal-100 text-teal-700">
+      <svg class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12z" />
+      </svg>
+    </div>
+
+    <h1 class="font-serif text-4xl font-semibold text-forest-800">Support Our Work</h1>
+    <p class="mt-4 text-lg leading-relaxed text-stone-700">
+      {site.name} is a Northwest Arkansas conservation nonprofit. Your gift supports watershed protection,
+      habitat restoration, and volunteer stewardship at Healing Springs Natural Area.
+    </p>
+  </div>
+
+  <form id="donate-form" class="brand-card mt-10 p-6 md:p-8" novalidate>
+    <fieldset>
+      <legend class="font-serif text-lg font-semibold text-forest-800">Choose an amount</legend>
+      <div class="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-5">
+        {
+          donationConfig.amounts.map((amount) => (
+            <button
+              type="button"
+              class="donate-amount-btn rounded-brand border border-stone-300 bg-base px-3 py-3 text-sm font-semibold text-forest-800 transition-colors hover:border-water-400 hover:bg-water-50"
+              data-amount={amount}
+            >
+              ${amount}
+            </button>
+          ))
+        }
+      </div>
+    </fieldset>
+
+    <div class="mt-6">
+      <label for="donate-custom-amount" class="block text-sm font-medium text-stone-700">
+        Or enter a custom amount (USD)
+      </label>
+      <div class="relative mt-2 max-w-xs">
+        <span class="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-stone-500">$</span>
+        <input
+          type="number"
+          id="donate-custom-amount"
+          name="customAmount"
+          min={donationConfig.minAmount}
+          max={donationConfig.maxAmount}
+          step="1"
+          placeholder="Other"
+          class="block w-full rounded-brand border border-stone-300 bg-base py-2.5 pl-8 pr-4 text-stone-900 focus:border-water-500 focus:outline-none focus:ring-1 focus:ring-water-500"
+        />
+      </div>
+    </div>
+
+    {
+      donationConfig.allowRecurring && (
+        <fieldset class="mt-8">
+          <legend class="text-sm font-medium text-stone-700">Frequency</legend>
+          <div class="mt-3 flex flex-wrap gap-4">
+            <label class="inline-flex cursor-pointer items-center gap-2 text-sm text-stone-700">
+              <input type="radio" name="frequency" value="once" checked class="text-water-600 focus:ring-water-500" />
+              One-time
+            </label>
+            <label class="inline-flex cursor-pointer items-center gap-2 text-sm text-stone-700">
+              <input type="radio" name="frequency" value="monthly" class="text-water-600 focus:ring-water-500" />
+              Monthly
+            </label>
+          </div>
+        </fieldset>
+      )
+    }
+
+    <div class="mt-8 flex flex-wrap items-center gap-4">
+      <button
+        type="submit"
+        id="donate-submit"
+        class="rounded-brand bg-water-600 px-8 py-3 text-sm font-semibold text-white transition-colors hover:bg-water-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-water-600 disabled:cursor-not-allowed disabled:opacity-60"
+      >
+        Donate Securely
+      </button>
+      <p id="donate-status" class="hidden text-sm text-stone-600" aria-live="polite"></p>
+    </div>
+  </form>
+
+  <div class="brand-card mt-8 p-6 text-left text-sm text-stone-600">
+    <h2 class="font-serif text-base font-semibold text-forest-800">Tax-deductible giving</h2>
+    <p class="mt-2 leading-relaxed">{taxDeductibilityNotice}</p>
+    {ein && <p class="mt-2 font-medium text-stone-700">EIN: {ein}</p>}
+    <ul class="mt-4 space-y-2">
+      <li>Secure online giving via Stripe Checkout</li>
+      <li>One-time and monthly donation options</li>
+      <li>Email receipt from Stripe for your records</li>
+    </ul>
+  </div>
+
+  <div class="mt-8 text-center">
+    <p class="text-sm text-stone-600">
+      Prefer to give offline? Email
+      <a href={`mailto:${site.email}`} class="text-water-700 no-underline hover:text-water-800">{site.email}</a>
+      for check or wire instructions.
+    </p>
+    <div class="mt-6 flex flex-wrap justify-center gap-4">
+      <Button href="/contact/" variant="outline">Contact Us</Button>
+      <Button href="/get-involved/" variant="outline">Volunteer</Button>
+    </div>
+  </div>
+</div>
+
+<script src="../scripts/donate.js"></script>

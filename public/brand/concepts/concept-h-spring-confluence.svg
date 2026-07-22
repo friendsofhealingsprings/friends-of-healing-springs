@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <title>Concept H - Spring Confluence</title>
+  <!-- Watershed drainage converging to spring -->
+  <path d="M10 10L22 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <path d="M38 10L26 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <path d="M24 8L24 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+  <!-- Spring pool -->
+  <circle cx="24" cy="20" r="2.5" fill="currentColor"/>
+  <!-- Stream flowing out -->
+  <path
+    d="M24 22C22 26 26 30 24 34C22 38 26 40 24 44"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <path
+    d="M28 26C30 28 32 30 34 32"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    opacity="0.35"
+  />
+  <!-- Darter -->
+  <path
+    d="M20 34C23 32 28 32 30 34C29 36 24 36 21 35C20 35 20 34 20 34"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+  <path d="M20 34L16 32M20 34L16 36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  <circle cx="28" cy="33.5" r="1" fill="currentColor"/>
+</svg>

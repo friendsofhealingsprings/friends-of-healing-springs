@@ -1,0 +1,19 @@
+---
+import { site } from '../data/site';
+
+interface Props {
+  variant?: 'header' | 'footer' | 'inline';
+  class?: string;
+}
+
+const { variant = 'inline', class: className = '' } = Astro.props;
+
+const variants = {
+  header:
+    'font-serif text-base font-semibold leading-snug text-forest-800 group-hover:text-water-700',
+  footer: 'font-serif text-base font-semibold leading-snug text-white',
+  inline: 'font-serif font-semibold text-forest-800',
+};
+---
+
+<span class:list={[variants[variant], className]}>{site.name}</span>

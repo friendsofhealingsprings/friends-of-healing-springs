@@ -1,0 +1,6 @@
+# Cloudflare Pages local secrets — copy to .dev.vars (never commit .dev.vars)
+RESEND_API_KEY=
+CONTACT_TO_EMAIL=info@healingsprings.org
+CONTACT_FROM_EMAIL=Friends of Healing Springs <notify@healingsprings.org>
+STRIPE_SECRET_KEY=
+SITE_URL=http://localhost:8788

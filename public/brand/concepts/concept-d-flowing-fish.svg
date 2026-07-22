@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <title>Concept D - Flowing Stream and Fish</title>
+  <!-- Stream current -->
+  <path
+    d="M2 34C10 30 18 36 26 33C34 30 40 34 46 32"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <path
+    d="M2 39C10 35 18 40 26 37C34 34 40 38 46 36"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    fill="none"
+    opacity="0.35"
+  />
+  <!-- Fish profile -->
+  <path
+    d="M12 24C18 19 28 19 34 23C32 27 24 28 18 26C15 25 13 25 12 24"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+  <path
+    d="M12 24L6 20M12 24L6 28"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <circle cx="30" cy="22" r="1.5" fill="currentColor"/>
+</svg>

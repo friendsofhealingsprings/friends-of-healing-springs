@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none" role="img" aria-label="Stream Path and Waterfall">
+  <circle cx="32" cy="32" r="30" stroke="#2F5D50" stroke-width="1.25" fill="#F7F6F2"/>
+  <!-- Spring and waterfall at headwaters -->
+  <circle cx="32" cy="12" r="2.25" fill="#1F6F8B"/>
+  <path d="M32 14V18" stroke="#1F6F8B" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M29 18H35" stroke="#8C8579" stroke-width="0.9" stroke-linecap="round"/>
+  <path d="M30 18V24" stroke="#1F6F8B" stroke-width="1.25" stroke-linecap="round" opacity="0.7"/>
+  <path d="M32 18V26" stroke="#1F6F8B" stroke-width="1.75" stroke-linecap="round"/>
+  <path d="M34 18V24" stroke="#1F6F8B" stroke-width="1.25" stroke-linecap="round" opacity="0.7"/>
+  <!-- Stream S-path -->
+  <path
+    d="M42 20C42 28 22 28 22 34C22 40 42 40 42 50"
+    stroke="#1F6F8B"
+    stroke-width="5"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <!-- Fish in stream -->
+  <path d="M26 36C29 34.5 35 34.5 37 36C35 37.5 29 37.5 26 36Z" fill="#F7F6F2"/>
+  <!-- Habitat branch -->
+  <path d="M46 24V40" stroke="#4C6B3C" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M46 26C50 26 52 28 46 30" stroke="#4C6B3C" stroke-width="1.25" stroke-linecap="round" fill="none"/>
+  <path d="M46 29C50 29 52 31 46 33" stroke="#4C6B3C" stroke-width="1.25" stroke-linecap="round" fill="none"/>
+  <path d="M46 32C49 32 51 34 46 36" stroke="#4C6B3C" stroke-width="1.25" stroke-linecap="round" fill="none"/>
+  <path d="M46 35C49 35 51 37 46 39" stroke="#4C6B3C" stroke-width="1.25" stroke-linecap="round" fill="none"/>
+</svg>

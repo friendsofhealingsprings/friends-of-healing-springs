@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <title>Concept F - Stream Darter</title>
+  <!-- Spring-fed stream channel -->
+  <path d="M4 30C12 26 20 34 28 30C36 26 42 30 46 28" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  <path d="M4 36C12 32 20 38 28 35C36 32 42 36 46 34" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+  <!-- Spring origin at headwaters -->
+  <circle cx="6" cy="24" r="2" fill="currentColor"/>
+  <path d="M6 26C8 28 10 29 12 30" stroke="currentColor" stroke-width="2" stroke-linecap="round" opacity="0.5"/>
+  <!-- Darter  benthic profile with dorsal hint -->
+  <path
+    d="M16 33C20 30 27 30 30 33C28 35 22 35 18 34C17 34 16 33 16 33"
+    stroke="currentColor"
+    stroke-width="2.5"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+  <path d="M22 30L23 28L25 30" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M16 33L11 30M16 33L11 36" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="28" cy="32" r="1.25" fill="currentColor"/>
+</svg>

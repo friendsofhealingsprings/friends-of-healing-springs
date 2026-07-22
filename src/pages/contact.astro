@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ContactForm from '../components/ContactForm.astro';
+import OrganizationName from '../components/OrganizationName.astro';
+import { site, organizationStatusLine } from '../data/site';
+---
+
+<BaseLayout
+  title="Contact"
+  description="Contact Friends of Healing Springs Natural Area, Inc. for volunteer inquiries, partnerships, and general questions about our conservation work."
+>
+  <PageHero
+    title="Contact Us"
+    subtitle="We welcome inquiries from volunteers, partners, and community members."
+  />
+
+  <Section background="white">
+    <div class="grid gap-12 lg:grid-cols-3">
+      <div class="lg:col-span-1">
+        <SectionHeading title="Get in Touch" />
+        <div class="space-y-6">
+          <div>
+            <h3 class="text-sm font-semibold uppercase tracking-wide text-stone-500">Email</h3>
+            <a href={`mailto:${site.email}`} class="mt-1 block text-lg text-water-700 no-underline hover:text-water-800">
+              {site.email}
+            </a>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold uppercase tracking-wide text-stone-500">Location</h3>
+            <p class="mt-1 text-stone-700">{site.location}</p>
+            <p class="text-sm text-stone-500">Northwest Arkansas</p>
+          </div>
+          <div>
+            <h3 class="text-sm font-semibold uppercase tracking-wide text-stone-500">Organization</h3>
+            <div class="mt-1">
+              <OrganizationName variant="inline" />
+            </div>
+            <p class="mt-1 text-sm text-stone-500">{organizationStatusLine}</p>
+          </div>
+        </div>
+      </div>
+      <div class="lg:col-span-2">
+        <ContactForm
+          id="contact-form"
+          formType="general"
+          title="General Inquiry"
+          submitLabel="Send Message"
+        />
+      </div>
+    </div>
+  </Section>
+
+  <Section background="neutral">
+    <div class="grid gap-12 lg:grid-cols-2">
+      <div>
+        <SectionHeading title="Volunteer Inquiry" subtitle="Interested in joining a stewardship workday?" />
+        <p class="text-stone-700">
+          Let us know your availability and interests. We will follow up with details about upcoming volunteer opportunities at Healing Springs Natural Area.
+        </p>
+        <ContactForm
+          id="contact-volunteer-form"
+          formType="volunteer"
+          title="Volunteer Interest"
+          submitLabel="Submit Interest"
+        />
+      </div>
+      <div>
+        <SectionHeading title="Partnership Inquiry" subtitle="Agencies, funders, and organizations." />
+        <p class="text-stone-700">
+          We welcome inquiries from conservation agencies, grant-making organizations, and community partners interested in collaborative watershed stewardship.
+        </p>
+        <ContactForm
+          id="contact-partnership-form"
+          formType="partnership"
+          title="Partnership Inquiry"
+          submitLabel="Send Inquiry"
+        />
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

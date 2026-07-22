@@ -1,0 +1,132 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import Section from '../components/Section.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import Button from '../components/Button.astro';
+import ConservationIcon from '../components/ConservationIcon.astro';
+import PostPreview from '../components/PostPreview.astro';
+import { getCollection } from 'astro:content';
+import { images } from '../data/images';
+import { mission } from '../data/site';
+import { conservationPriorities } from '../data/content';
+import { sortPostsByDateDesc } from '../utils/posts';
+
+const posts = sortPostsByDateDesc(await getCollection('posts', ({ data }) => !data.draft)).slice(0, 3);
+---
+
+<BaseLayout title="Home">
+  <Hero
+    headline="Stewardship of Healing Springs Natural Area"
+    subheadline="Conservation, education, and watershed protection in Northwest Arkansas."
+    image={images.healingSpringsStream}
+    imageAlt="Little Osage Creek at Healing Springs Natural Area"
+  />
+
+  <!-- Mission -->
+  <Section background="white">
+    <div class="mx-auto max-w-3xl text-center">
+      <SectionHeading
+        title="Our Mission"
+        subtitle="Friends of Healing Springs Natural Area, Inc. is an Arkansas conservation nonprofit dedicated to the long-term stewardship of Healing Springs Natural Area. We are recognized by the IRS as a 501(c)(3) tax-exempt organization."
+        centered
+      />
+      <p class="text-lg leading-relaxed text-stone-700">{mission}</p>
+      <div class="mt-8">
+        <Button href="/about/" variant="primary">About Our Organization</Button>
+      </div>
+    </div>
+  </Section>
+
+  <!-- Why this place matters -->
+  <Section background="neutral">
+    <div class="grid items-center gap-12 lg:grid-cols-2">
+      <div>
+        <SectionHeading
+          title="Why This Place Matters"
+          subtitle="Healing Springs Natural Area protects a spring-fed ecosystem of statewide conservation significance in the Little Osage Creek watershed."
+        />
+        <p class="mb-4 leading-relaxed text-stone-700">
+          This natural area in Highfill, Arkansas supports rare aquatic species, spring-fed streams, Little Osage Creek, and mature forest habitat within the Ozark Highlands. Its protection benefits water quality, biodiversity, and community access to nature.
+        </p>
+        <p class="leading-relaxed text-stone-700">
+          We work alongside state conservation agencies, local stakeholders, and volunteers to ensure this resource is cared for with science-informed stewardship and transparent governance.
+        </p>
+        <div class="mt-8">
+          <Button href="/why-it-matters/" variant="outline">Explore Ecological Significance</Button>
+        </div>
+      </div>
+      <div class="overflow-hidden rounded-brand border border-stone-200">
+        <img
+          src={images.littleOsageCreek}
+          alt="Little Osage Creek in the watershed"
+          class="h-full w-full object-cover"
+          loading="lazy"
+        />
+      </div>
+    </div>
+  </Section>
+
+  <!-- Conservation priorities -->
+  <Section background="white">
+    <SectionHeading
+      title="Conservation Priorities"
+      subtitle="Our work focuses on measurable outcomes for watershed health, habitat, species protection, and community engagement."
+      centered
+    />
+    <div class="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+      {
+        conservationPriorities.map((priority) => (
+          <div class="brand-card p-6">
+            <ConservationIcon icon={priority.icon} />
+            <h3 class="font-serif text-lg font-semibold text-forest-800">{priority.title}</h3>
+            <p class="mt-2 text-sm leading-relaxed text-stone-600">{priority.description}</p>
+          </div>
+        ))
+      }
+    </div>
+  </Section>
+
+  <!-- Latest updates -->
+  <Section background="spring">
+    <SectionHeading
+      title="Latest Updates"
+      subtitle="News from our board, partners, and volunteer community."
+      centered
+    />
+    <div class="grid gap-8 md:grid-cols-3">
+      {
+        posts.map((post) => (
+          <PostPreview
+            title={post.data.title}
+            description={post.data.description}
+            href={`/news/${post.slug}/`}
+            date={post.data.pubDate}
+            image={post.data.image}
+            imageAlt={post.data.imageAlt}
+          />
+        ))
+      }
+    </div>
+    <div class="mt-10 text-center">
+      <Button href="/news/" variant="primary">View All Updates</Button>
+    </div>
+  </Section>
+
+  <!-- Volunteer CTA -->
+  <Section background="forest">
+    <div class="mx-auto max-w-3xl text-center">
+      <SectionHeading
+        title="Join Us in Stewardship"
+        subtitle="Volunteers support field work, restoration, and ongoing stewardship at Healing Springs Natural Area."
+        centered
+        light
+      />
+      <div class="flex flex-wrap justify-center gap-4">
+        <Button href="/get-involved/" variant="secondary" size="lg">Get Involved</Button>
+        <Button href="/donate/" variant="primary" size="lg">Donate</Button>
+        <Button href="/contact/" variant="outline" size="lg">Contact Us</Button>
+      </div>
+    </div>
+  </Section>
+</BaseLayout>

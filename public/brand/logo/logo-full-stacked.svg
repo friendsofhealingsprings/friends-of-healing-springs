@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 360" role="img" aria-label="Friends of Healing Springs Natural Area">
+  <defs>
+    <mask id="stream-s-stacked">
+      <rect width="100" height="100" fill="white"/>
+      <path
+        d="M50 14C24 14 24 38 50 50C76 62 76 86 50 86"
+        fill="none"
+        stroke="black"
+        stroke-width="15"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </mask>
+  </defs>
+  <g transform="translate(160 8)">
+    <circle cx="50" cy="50" r="50" fill="#1b4d3e" mask="url(#stream-s-stacked)"/>
+  </g>
+  <text
+    x="210"
+    y="148"
+    text-anchor="middle"
+    fill="#1b4d3e"
+    font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
+    font-size="13"
+    font-weight="500"
+    letter-spacing="0.14em"
+  >FRIENDS OF</text>
+  <text
+    x="210"
+    y="192"
+    text-anchor="middle"
+    fill="#1b4d3e"
+    font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
+    font-size="34"
+    font-weight="700"
+    letter-spacing="0.04em"
+  >HEALING SPRINGS</text>
+  <text
+    x="210"
+    y="224"
+    text-anchor="middle"
+    fill="#6d9479"
+    font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
+    font-size="13"
+    font-weight="500"
+    letter-spacing="0.16em"
+  >NATURAL AREA</text>
+  <line x1="130" y1="244" x2="290" y2="244" stroke="#1b4d3e" stroke-width="0.75" opacity="0.35"/>
+  <text
+    x="210"
+    y="268"
+    text-anchor="middle"
+    fill="#1b4d3e"
+    font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
+    font-size="9.5"
+    font-weight="500"
+    letter-spacing="0.22em"
+  >CONSERVATION FOUNDATION</text>
+  <text
+    x="210"
+    y="288"
+    text-anchor="middle"
+    fill="#6d9479"
+    font-family="Inter, 'Helvetica Neue', Arial, sans-serif"
+    font-size="9"
+    font-weight="400"
+    letter-spacing="0.18em"
+  >EST. 2026</text>
+</svg>

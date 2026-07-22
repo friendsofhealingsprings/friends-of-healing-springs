@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <title>Concept J - Channel</title>
+  <path d="M0 32H48" stroke="currentColor" stroke-width="1.5"/>
+  <path d="M0 28H48" stroke="currentColor" stroke-width="1.5"/>
+  <path
+    d="M16 18C26 16 38 18 38 22C36 26 24 26 16 22C15 20 15 19 16 18Z"
+    fill="currentColor"
+  />
+</svg>

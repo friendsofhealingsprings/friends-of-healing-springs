@@ -1,0 +1,53 @@
+---
+import { galleryCategories, galleryImages } from '../data/gallery';
+---
+
+<div class="gallery-filter mb-8 flex flex-wrap gap-2" role="tablist" aria-label="Gallery categories">
+  <button
+    type="button"
+    class="gallery-filter-btn active rounded-brand bg-water-600 px-4 py-2 text-sm font-medium text-white"
+    data-category="all"
+    role="tab"
+    aria-selected="true"
+  >
+    All
+  </button>
+  {
+    galleryCategories.map((cat) => (
+      <button
+        type="button"
+        class="gallery-filter-btn rounded-brand border border-stone-200 bg-sand-100 px-4 py-2 text-sm font-medium text-stone-700 hover:bg-sand-200"
+        data-category={cat.id}
+        role="tab"
+        aria-selected="false"
+      >
+        {cat.label}
+      </button>
+    ))
+  }
+</div>
+
+<div class="gallery-grid grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {
+    galleryImages.map((image) => (
+      <figure
+        class="gallery-item brand-card group overflow-hidden p-0"
+        data-category={image.category}
+      >
+        <div class="aspect-[4/3] overflow-hidden bg-sand-100">
+          <img
+            src={image.src}
+            alt={image.alt}
+            class="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
+          />
+        </div>
+        {
+          image.caption && (
+            <figcaption class="border-t border-stone-200 px-4 py-3 text-sm text-stone-600">{image.caption}</figcaption>
+          )
+        }
+      </figure>
+    ))
+  }
+</div>

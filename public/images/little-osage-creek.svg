@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#c7d7c1"/>
+      <stop offset="100%" style="stop-color:#759a68"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#bg)"/>
+  <path d="M0 550 Q200 520 400 540 T800 530 T1200 550 L1200 800 L0 800 Z" fill="#3988a3" opacity="0.7"/>
+  <path d="M0 580 Q300 560 600 575 T1200 580" stroke="#b8dde8" stroke-width="4" fill="none"/>
+  <circle cx="150" cy="400" r="80" fill="#2b4027" opacity="0.4"/>
+  <circle cx="350" cy="350" r="100" fill="#344f2e" opacity="0.5"/>
+  <circle cx="900" cy="380" r="90" fill="#2b4027" opacity="0.4"/>
+  <text x="600" y="720" text-anchor="middle" font-family="Georgia, serif" font-size="28" fill="#243521" opacity="0.7">Little Osage Creek</text>
+  <text x="600" y="755" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" fill="#406338" opacity="0.5">Replace with photo: little-osage-creek.jpg</text>
+</svg>

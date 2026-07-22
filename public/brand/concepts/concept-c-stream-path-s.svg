@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+  <title>Concept C  Stream Path S</title>
+  <!-- Organic basin frame -->
+  <circle cx="24" cy="24" r="19" stroke="currentColor" stroke-width="2.5"/>
+  <!-- Flowing stream path -->
+  <path
+    d="M31 11C31 20 17 20 17 24C17 28 31 28 31 37"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linecap="round"
+    fill="none"
+  />
+  <!-- Spring head at path origin -->
+  <circle cx="31" cy="11" r="2.5" fill="currentColor"/>
+</svg>
