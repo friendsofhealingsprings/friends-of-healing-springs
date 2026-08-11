@@ -1,7 +1,11 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import Section from '../components/Section.astro';
+import SectionHeading from '../components/SectionHeading.astro';
 import DonateForm from '../components/DonateForm.astro';
+import Button from '../components/Button.astro';
+import { recognitionTiers, givingUses } from '../data/giving';
+import { site, ein, taxDeductibilityNotice } from '../data/site';
 ---
 
 <BaseLayout
@@ -10,5 +14,100 @@ import DonateForm from '../components/DonateForm.astro';
 >
   <Section background="white" padding="lg">
     <DonateForm />
+  </Section>
+
+  <Section background="neutral" padding="md">
+    <div class="mx-auto max-w-3xl">
+      <SectionHeading
+        title="How your gift is used"
+        subtitle="Community gifts are flexible, unrestricted funds that let us respond quickly and stretch every grant dollar further."
+      />
+      <ul class="grid gap-3 sm:grid-cols-2">
+        {
+          givingUses.map((use) => (
+            <li class="flex items-start gap-3 rounded-brand bg-base p-4 text-sm leading-relaxed text-stone-700 shadow-sm">
+              <svg
+                class="mt-0.5 h-5 w-5 flex-none text-teal-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.75"
+                stroke="currentColor"
+                aria-hidden="true"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5" />
+              </svg>
+              <span>{use}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </Section>
+
+  <Section background="white" padding="md">
+    <div class="mx-auto max-w-3xl">
+      <SectionHeading
+        title="Donor recognition"
+        subtitle="We're grateful for support at every level. These informal recognition levels reflect total giving over a year."
+      />
+
+      <div class="overflow-hidden rounded-brand border border-stone-200">
+        <table class="w-full border-collapse text-left">
+          <caption class="sr-only">Annual giving amounts and their recognition levels</caption>
+          <thead>
+            <tr class="bg-forest-700 text-white">
+              <th scope="col" class="px-5 py-3 text-sm font-semibold">Annual giving</th>
+              <th scope="col" class="px-5 py-3 text-sm font-semibold">Recognition</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              recognitionTiers.map((tier, index) => (
+                <tr class:list={[index % 2 === 1 && 'bg-sand-50', 'border-t border-stone-200']}>
+                  <td class="px-5 py-3 text-sm font-medium text-stone-700">{tier.range}</td>
+                  <td class="px-5 py-3 font-serif text-sm font-semibold text-forest-800">
+                    {tier.name}
+                  </td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+
+      <p class="mt-4 text-sm leading-relaxed text-stone-600">
+        These are informal recognition levels offered as a thank-you. They confer no membership,
+        voting rights, or other privileges.
+      </p>
+    </div>
+  </Section>
+
+  <Section background="white" padding="sm">
+    <div class="mx-auto max-w-2xl">
+      <div class="brand-card p-6 text-left text-sm text-stone-600">
+        <h2 class="font-serif text-base font-semibold text-forest-800">Tax-deductible giving</h2>
+        <p class="mt-2 leading-relaxed">{taxDeductibilityNotice}</p>
+        {ein && <p class="mt-2 font-medium text-stone-700">EIN: {ein}</p>}
+        <ul class="mt-4 space-y-2">
+          <li>Secure online giving via Stripe Checkout</li>
+          <li>One-time and monthly donation options</li>
+          <li>Email receipt from Stripe for your records</li>
+        </ul>
+      </div>
+
+      <div class="mt-8 text-center">
+        <p class="text-sm text-stone-600">
+          Prefer to give offline? Email
+          <a href={`mailto:${site.email}`} class="text-water-700 no-underline hover:text-water-800">
+            {site.email}
+          </a>
+          for check or wire instructions.
+        </p>
+        <div class="mt-6 flex flex-wrap justify-center gap-4">
+          <Button href="/contact/" variant="outline">Contact Us</Button>
+          <Button href="/get-involved/" variant="outline">Volunteer</Button>
+        </div>
+      </div>
+    </div>
   </Section>
 </BaseLayout>

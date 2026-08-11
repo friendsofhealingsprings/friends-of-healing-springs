@@ -1,10 +1,11 @@
 ---
-import Button from './Button.astro';
 import { donationConfig } from '../utils/donate';
-import { site, ein, taxDeductibilityNotice } from '../data/site';
+import { site } from '../data/site';
 
 const showSuccess = Astro.url.searchParams.get('success') === '1';
 const showCanceled = Astro.url.searchParams.get('canceled') === '1';
+
+const formatAmount = (amount: number) => `$${amount.toLocaleString('en-US')}`;
 ---
 
 <div class="mx-auto max-w-2xl" id="donate-section">
@@ -42,17 +43,18 @@ const showCanceled = Astro.url.searchParams.get('canceled') === '1';
       </svg>
     </div>
 
-    <h1 class="font-serif text-4xl font-semibold text-forest-800">Support Our Work</h1>
+    <h1 class="font-serif text-4xl font-semibold text-forest-800">Support Us</h1>
     <p class="mt-4 text-lg leading-relaxed text-stone-700">
-      {site.name} is a Northwest Arkansas conservation nonprofit. Your gift supports watershed protection,
-      habitat restoration, and volunteer stewardship at Healing Springs Natural Area.
+      {site.name} pursues grants and partnerships for its major conservation work. Community gifts add a modest, flexible source of
+      funding that helps us act quickly. Your contribution supplements, rather than replaces, grants
+      and other funding, and helps make our stewardship more responsive and resilient.
     </p>
   </div>
 
   <form id="donate-form" class="brand-card mt-10 p-6 md:p-8" novalidate>
     <fieldset>
       <legend class="font-serif text-lg font-semibold text-forest-800">Choose an amount</legend>
-      <div class="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-5">
+      <div class="mt-4 grid grid-cols-3 gap-3 sm:grid-cols-4">
         {
           donationConfig.amounts.map((amount) => (
             <button
@@ -60,7 +62,7 @@ const showCanceled = Astro.url.searchParams.get('canceled') === '1';
               class="donate-amount-btn rounded-brand border border-stone-300 bg-base px-3 py-3 text-sm font-semibold text-forest-800 transition-colors hover:border-water-400 hover:bg-water-50"
               data-amount={amount}
             >
-              ${amount}
+              {formatAmount(amount)}
             </button>
           ))
         }
@@ -100,6 +102,10 @@ const showCanceled = Astro.url.searchParams.get('canceled') === '1';
               Monthly
             </label>
           </div>
+          <p class="mt-3 text-sm text-stone-600">
+            Consider giving monthly—even a small recurring gift provides dependable support we can
+            count on throughout the year.
+          </p>
         </fieldset>
       )
     }
@@ -115,29 +121,6 @@ const showCanceled = Astro.url.searchParams.get('canceled') === '1';
       <p id="donate-status" class="hidden text-sm text-stone-600" aria-live="polite"></p>
     </div>
   </form>
-
-  <div class="brand-card mt-8 p-6 text-left text-sm text-stone-600">
-    <h2 class="font-serif text-base font-semibold text-forest-800">Tax-deductible giving</h2>
-    <p class="mt-2 leading-relaxed">{taxDeductibilityNotice}</p>
-    {ein && <p class="mt-2 font-medium text-stone-700">EIN: {ein}</p>}
-    <ul class="mt-4 space-y-2">
-      <li>Secure online giving via Stripe Checkout</li>
-      <li>One-time and monthly donation options</li>
-      <li>Email receipt from Stripe for your records</li>
-    </ul>
-  </div>
-
-  <div class="mt-8 text-center">
-    <p class="text-sm text-stone-600">
-      Prefer to give offline? Email
-      <a href={`mailto:${site.email}`} class="text-water-700 no-underline hover:text-water-800">{site.email}</a>
-      for check or wire instructions.
-    </p>
-    <div class="mt-6 flex flex-wrap justify-center gap-4">
-      <Button href="/contact/" variant="outline">Contact Us</Button>
-      <Button href="/get-involved/" variant="outline">Volunteer</Button>
-    </div>
-  </div>
 </div>
 
 <script src="../scripts/donate.js"></script>

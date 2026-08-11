@@ -9,7 +9,7 @@ export interface DonationConfig {
 }
 
 export const donationConfig: DonationConfig = {
-  amounts: [25, 50, 100, 250, 500],
+  amounts: [5, 15, 25, 50, 100, 250, 500, 1000],
   allowRecurring: true,
   currency: 'usd',
   minAmount: 5,
