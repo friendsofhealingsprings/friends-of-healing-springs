@@ -27,7 +27,7 @@ function siteBaseUrl(env: Env, request: Request): string {
     return origin;
   }
 
-  return 'https://healingsprings.org';
+  return 'https://friendsofhealingsprings.org';
 }
 
 export async function onRequestPost(context: {
@@ -41,7 +41,7 @@ export async function onRequestPost(context: {
       {
         ok: false,
         error:
-          'Online checkout is not configured yet. Please email info@healingsprings.org to donate by check.',
+          'Online checkout is not configured yet. Please email info@friendsofhealingsprings.org to donate by check.',
       },
       503
     );
@@ -63,9 +63,10 @@ export async function onRequestPost(context: {
 
   const amountCents = Math.round(amount * 100);
   const baseUrl = siteBaseUrl(env, request);
-  const successUrl = `${baseUrl}/donate/?success=1`;
+  const successUrl = `${baseUrl}/donate/?success=1&session_id={CHECKOUT_SESSION_ID}`;
   const cancelUrl = `${baseUrl}/donate/?canceled=1`;
   const productName = 'Donation to Friends of Healing Springs Natural Area, Inc.';
+  const thankYou = 'Thank you for supporting conservation at Healing Springs Natural Area.';
 
   const params = new URLSearchParams();
   params.set('mode', frequency === 'monthly' ? 'subscription' : 'payment');
@@ -75,9 +76,25 @@ export async function onRequestPost(context: {
   params.set('line_items[0][price_data][currency]', 'usd');
   params.set('line_items[0][price_data][unit_amount]', String(amountCents));
   params.set('line_items[0][price_data][product_data][name]', productName);
+  params.set('custom_text[submit][message]', thankYou);
+
+  // Donation metadata for reporting/reconciliation in the Stripe Dashboard.
+  params.set('metadata[source]', 'website');
+  params.set('metadata[frequency]', frequency);
+  params.set('metadata[campaign]', 'community-giving');
 
   if (frequency === 'monthly') {
     params.set('line_items[0][price_data][recurring][interval]', 'month');
+    params.set('subscription_data[metadata][source]', 'website');
+    params.set('subscription_data[metadata][frequency]', 'monthly');
+    params.set('subscription_data[metadata][campaign]', 'community-giving');
+  } else {
+    // "Donate" call-to-action + carry metadata onto the PaymentIntent.
+    params.set('submit_type', 'donate');
+    params.set('payment_intent_data[description]', productName);
+    params.set('payment_intent_data[metadata][source]', 'website');
+    params.set('payment_intent_data[metadata][frequency]', 'one-time');
+    params.set('payment_intent_data[metadata][campaign]', 'community-giving');
   }
 
   const stripeResponse = await fetch('https://api.stripe.com/v1/checkout/sessions', {

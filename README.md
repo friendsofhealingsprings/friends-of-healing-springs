@@ -53,7 +53,7 @@ npm run preview
 
 ### Custom Domain
 
-After deployment, add your domain under **Pages → Custom domains** (e.g. `healingsprings.org`). Update `site.url` in `src/data/site.ts` and `site` in `astro.config.mjs` to match.
+After deployment, add your domain under **Pages → Custom domains** (e.g. `friendsofhealingsprings.org`). Update `site.url` in `src/data/site.ts` and `site` in `astro.config.mjs` to match.
 
 ---
 
@@ -64,14 +64,14 @@ Contact forms on `/contact/` and `/get-involved/` submit to a **Cloudflare Pages
 ### One-time setup
 
 1. Create a free [Resend](https://resend.com) account and add an API key.
-2. Verify your sending domain in Resend (e.g. `healingsprings.org`), or use `onboarding@resend.dev` for testing only.
+2. Verify your sending domain in Resend (e.g. `friendsofhealingsprings.org`), or use `onboarding@resend.dev` for testing only.
 3. In **Cloudflare Pages → your project → Settings → Environment variables**, add:
 
    | Variable | Example | Notes |
    |----------|---------|-------|
    | `RESEND_API_KEY` | `re_...` | Secret — Production and Preview |
-   | `CONTACT_TO_EMAIL` | `info@healingsprings.org` | Where inquiries are delivered |
-   | `CONTACT_FROM_EMAIL` | `Friends of Healing Springs <notify@healingsprings.org>` | Must use a verified Resend domain |
+   | `CONTACT_TO_EMAIL` | `info@friendsofhealingsprings.org` | Where inquiries are delivered |
+   | `CONTACT_FROM_EMAIL` | `Friends of Healing Springs <notify@friendsofhealingsprings.org>` | Must use a verified Resend domain |
 
 4. Redeploy the site after saving variables.
 
@@ -188,7 +188,7 @@ The `/donate/` page collects one-time and monthly gifts via **Stripe Checkout**.
    | Variable | Example | Notes |
    |----------|---------|-------|
    | `STRIPE_SECRET_KEY` | `sk_live_...` | Secret — Production and Preview |
-   | `SITE_URL` | `https://healingsprings.org` | Used for success/cancel redirect URLs |
+   | `SITE_URL` | `https://friendsofhealingsprings.org` | Used for success/cancel redirect URLs |
 
 4. Add your **EIN** to `src/data/site.ts` (`export const ein = 'XX-XXXXXXX'`) for public disclosure and receipts.
 5. Redeploy after saving variables.

@@ -89,7 +89,7 @@ function initDonateForm() {
       throw new Error(result.error ?? 'Unable to start checkout.');
     } catch (err) {
       const message = err instanceof Error ? err.message : 'Unable to start checkout.';
-      status.textContent = `${message} Please email info@healingsprings.org to donate offline.`;
+      status.textContent = `${message} Please email info@friendsofhealingsprings.org to donate offline.`;
       status.classList.remove('text-stone-600');
       status.classList.add('text-red-700');
     } finally {

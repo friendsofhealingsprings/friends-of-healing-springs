@@ -83,8 +83,8 @@ const sections = [
     heading: 'Official Document Availability',
     paragraphs: [
       'The official Articles of Incorporation are maintained in the organization\'s corporate records and are available upon reasonable request.',
-      'Contact: info@healingsprings.org',
-      'Website: https://healingsprings.org',
+      'Contact: info@friendsofhealingsprings.org',
+      'Website: https://friendsofhealingsprings.org',
     ],
   },
 ];

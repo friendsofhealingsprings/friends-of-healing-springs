@@ -97,7 +97,7 @@ function initContactForms() {
       } catch (err) {
         const message =
           err instanceof Error ? err.message : 'Unable to send message.';
-        status.textContent = `${message} Please email info@healingsprings.org directly.`;
+        status.textContent = `${message} Please email info@friendsofhealingsprings.org directly.`;
         status.classList.remove('text-stone-600');
         status.classList.add('text-red-700');
       } finally {

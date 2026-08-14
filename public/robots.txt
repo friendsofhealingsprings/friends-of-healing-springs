@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://healingsprings.org/sitemap-index.xml
+Sitemap: https://friendsofhealingsprings.org/sitemap-index.xml

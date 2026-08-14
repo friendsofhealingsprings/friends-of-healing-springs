@@ -3,8 +3,8 @@ export const site = {
   tagline: 'Conservation, education, and stewardship of a spring-fed watershed.',
   description:
     'A community-led Arkansas conservation organization dedicated to protecting and restoring the spring-fed watershed ecosystem of Healing Springs Natural Area and Little Osage Creek. Recognized by the IRS as a 501(c)(3) tax-exempt organization.',
-  url: 'https://healingsprings.org',
-  email: 'info@healingsprings.org',
+  url: 'https://friendsofhealingsprings.org',
+  email: 'info@friendsofhealingsprings.org',
   location: 'Highfill, Arkansas',
   founded: '2025',
   keywords: [
