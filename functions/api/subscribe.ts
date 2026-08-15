@@ -5,9 +5,9 @@ interface SubscribePayload {
 }
 
 interface Env {
-  RESEND_API_KEY: string;
-  CONTACT_TO_EMAIL: string;
-  CONTACT_FROM_EMAIL: string;
+  MAILERLITE_API_KEY: string;
+  // Optional: restrict signups to a specific MailerLite group/audience.
+  MAILERLITE_GROUP_ID?: string;
 }
 
 function json(data: unknown, status = 200): Response {
@@ -30,7 +30,7 @@ export async function onRequestPost(context: {
 }): Promise<Response> {
   const { request, env } = context;
 
-  if (!env.RESEND_API_KEY || !env.CONTACT_TO_EMAIL || !env.CONTACT_FROM_EMAIL) {
+  if (!env.MAILERLITE_API_KEY) {
     return json(
       { ok: false, error: 'Newsletter signup is not configured yet. Please email us directly.' },
       503
@@ -60,31 +60,29 @@ export async function onRequestPost(context: {
     return json({ ok: false, error: 'Please check your entries and try again.' }, 400);
   }
 
-  const text = [
-    'New newsletter subscriber',
-    '',
-    `Name: ${name}`,
-    `Email: ${email}`,
-    `Submitted: ${new Date().toISOString()}`,
-  ].join('\n');
+  const subscriber: Record<string, unknown> = {
+    email,
+    fields: { name },
+  };
 
-  const resendResponse = await fetch('https://api.resend.com/emails', {
+  const groupId = env.MAILERLITE_GROUP_ID?.trim();
+  if (groupId) {
+    subscriber.groups = [groupId];
+  }
+
+  // MailerLite "Connect" API upserts the subscriber (create or update).
+  const mlResponse = await fetch('https://connect.mailerlite.com/api/subscribers', {
     method: 'POST',
     headers: {
-      Authorization: `Bearer ${env.RESEND_API_KEY}`,
+      Authorization: `Bearer ${env.MAILERLITE_API_KEY}`,
       'Content-Type': 'application/json',
+      Accept: 'application/json',
     },
-    body: JSON.stringify({
-      from: env.CONTACT_FROM_EMAIL,
-      to: [env.CONTACT_TO_EMAIL],
-      reply_to: email,
-      subject: `[Friends of Healing Springs] Newsletter signup: ${name}`,
-      text,
-    }),
+    body: JSON.stringify(subscriber),
   });
 
-  if (!resendResponse.ok) {
-    console.error('Resend API error:', await resendResponse.text());
+  if (!mlResponse.ok) {
+    console.error('MailerLite API error:', mlResponse.status, await mlResponse.text());
     return json(
       {
         ok: false,
