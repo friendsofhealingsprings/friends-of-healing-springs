@@ -2,7 +2,7 @@
 import '../styles/global.css';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import { site } from '../data/site';
+import { site, socialLinks } from '../data/site';
 import { defaultOgImage } from '../data/images';
 import { pageTitle, canonicalUrl } from '../utils/seo';
 
@@ -23,6 +23,29 @@ const {
 const fullTitle = pageTitle(title, site.name);
 const canonical = canonicalUrl(Astro.url.pathname, site.url);
 const ogImage = new URL(image, site.url).href;
+
+// Organization structured data (rendered on the homepage per Google guidance).
+// `sameAs` associates our official social profiles with the organization.
+const isHome = Astro.url.pathname === '/';
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'NGO',
+  name: site.name,
+  alternateName: 'FHSNA',
+  url: site.url,
+  logo: new URL('/brand/logo/logo-icon-only.svg', site.url).href,
+  image: ogImage,
+  description: site.description,
+  email: site.email,
+  foundingDate: site.founded,
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Highfill',
+    addressRegion: 'AR',
+    addressCountry: 'US',
+  },
+  sameAs: socialLinks.map((social) => social.href),
+};
 ---
 
 <!doctype html>
@@ -37,6 +60,8 @@ const ogImage = new URL(image, site.url).href;
     <meta name="keywords" content={site.keywords.join(', ')} />
     <link rel="canonical" href={canonical} />
     {noindex && <meta name="robots" content="noindex, nofollow" />}
+
+    {isHome && <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />

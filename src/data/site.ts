@@ -19,6 +19,20 @@ export const site = {
   ],
 } as const;
 
+/** Official social media profiles for the organization. */
+export const socialLinks = [
+  {
+    name: 'Facebook',
+    href: 'https://www.facebook.com/friendsofhealingsprings',
+    label: 'Follow Friends of Healing Springs Natural Area on Facebook',
+  },
+  {
+    name: 'LinkedIn',
+    href: 'https://www.linkedin.com/company/friends-of-healing-springs-natural-area/',
+    label: 'Follow Friends of Healing Springs Natural Area on LinkedIn',
+  },
+] as const;
+
 /** IRS Employer Identification Number — add for public display and receipts */
 export const ein = '';
 
