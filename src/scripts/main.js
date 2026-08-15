@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initGalleryFilter();
   initContactForms();
+  initNewsletterForms();
 });
 
 function initMobileMenu() {
@@ -100,6 +101,64 @@ function initContactForms() {
         status.textContent = `${message} Please email info@friendsofhealingsprings.org directly.`;
         status.classList.remove('text-stone-600');
         status.classList.add('text-red-700');
+      } finally {
+        if (submitBtn instanceof HTMLButtonElement) {
+          submitBtn.disabled = false;
+        }
+      }
+    });
+  });
+}
+
+function initNewsletterForms() {
+  document.querySelectorAll('.newsletter-form').forEach((form) => {
+    if (!(form instanceof HTMLFormElement)) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const status = form.querySelector('.newsletter-form-status');
+      const submitBtn = form.querySelector('.newsletter-form-submit');
+
+      if (!(status instanceof HTMLElement)) return;
+
+      const formData = new FormData(form);
+      const payload = {
+        name: String(formData.get('name') ?? '').trim(),
+        email: String(formData.get('email') ?? '').trim(),
+        website: String(formData.get('website') ?? '').trim(),
+      };
+
+      status.classList.remove('hidden', 'text-red-300', 'text-teal-200');
+      status.classList.add('text-sand-200');
+      status.textContent = 'Subscribing…';
+
+      if (submitBtn instanceof HTMLButtonElement) {
+        submitBtn.disabled = true;
+      }
+
+      try {
+        const response = await fetch('/api/subscribe', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const result = await response.json().catch(() => ({}));
+
+        if (response.ok && result.ok) {
+          status.textContent = 'Thank you for subscribing — we will be in touch.';
+          status.classList.remove('text-sand-200');
+          status.classList.add('text-teal-200');
+          form.reset();
+        } else {
+          throw new Error(result.error ?? 'Unable to complete signup.');
+        }
+      } catch (err) {
+        const message = err instanceof Error ? err.message : 'Unable to complete signup.';
+        status.textContent = `${message} Please email info@friendsofhealingsprings.org directly.`;
+        status.classList.remove('text-sand-200');
+        status.classList.add('text-red-300');
       } finally {
         if (submitBtn instanceof HTMLButtonElement) {
           submitBtn.disabled = false;
