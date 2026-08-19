@@ -59,9 +59,20 @@ After deployment, add your domain under **Pages → Custom domains** (e.g. `frie
 
 ## Contact Forms (Cloudflare Pages)
 
-Contact forms on `/contact/` and `/get-involved/` submit to a **Cloudflare Pages Function** at `functions/api/contact.ts`, which sends email via [Resend](https://resend.com).
+Contact forms on `/contact/` and `/get-involved/` (volunteer, partnership, and general) submit to a **Cloudflare Pages Function** at `functions/api/contact.ts`. Inquiries are stored as [MailerLite](https://www.mailerlite.com) subscribers using the same `MAILERLITE_API_KEY` as newsletter signup. Resend email is optional extra delivery only.
 
-### One-time setup
+### Production setup (MailerLite)
+
+If `MAILERLITE_API_KEY` is already set in Cloudflare (newsletter signup), volunteer, partnership, and general contact forms work without a Resend account. After someone submits:
+
+1. Open **MailerLite → Subscribers** and find their email.
+2. Open the subscriber to read **form_type** (Volunteer Inquiry vs Partnership Inquiry vs General Inquiry), **inquiry_subject**, and **inquiry_message**.
+
+A new group env var is not required. Optionally set `MAILERLITE_CONTACT_GROUP_ID` to drop inquiries into a dedicated group such as “Website Inquiries.” Do not reuse the newsletter group unless you want inquiry-only contacts to receive campaigns.
+
+This stores the message in MailerLite; it does **not** send an email to `info@`. For inbox delivery, add Resend later.
+
+### Optional: email delivery via Resend
 
 1. Create a free [Resend](https://resend.com) account and add an API key.
 2. Verify your sending domain in Resend (e.g. `friendsofhealingsprings.org`), or use `onboarding@resend.dev` for testing only.
@@ -73,21 +84,23 @@ Contact forms on `/contact/` and `/get-involved/` submit to a **Cloudflare Pages
    | `CONTACT_TO_EMAIL` | `info@friendsofhealingsprings.org` | Where inquiries are delivered |
    | `CONTACT_FROM_EMAIL` | `Friends of Healing Springs <notify@friendsofhealingsprings.org>` | Must use a verified Resend domain |
 
-4. Redeploy the site after saving variables.
+4. Redeploy the site after saving variables. When all three Resend vars are present, the function still stores the inquiry in MailerLite and also emails it.
 
 ### Local form testing
 
 ```bash
-cp .dev.vars.example .dev.vars   # add your Resend key
+cp .dev.vars.example .dev.vars   # add MAILERLITE_API_KEY (required for forms)
 npm run pages:dev                # builds site + runs Pages Functions locally
 ```
+
+`npm run dev` (Astro on port 4321) does **not** run Pages Functions, so local form posts will not hit this API.
 
 ### How it works
 
 - Browser POSTs JSON to `/api/contact`
-- The Pages Function validates input and sends email through Resend
-- Reply-to is set to the visitor's email so you can respond directly
-- A hidden honeypot field helps block basic bot spam
+- The Pages Function validates input (including a honeypot field)
+- If MailerLite is configured, it upserts a subscriber with name, email, form type, subject, and message
+- If Resend is also configured, it emails a copy (reply-to is the visitor)
 
 ---
 
@@ -266,7 +279,7 @@ For Mapbox, replace the tile layer URL and add your Mapbox access token.
 
 ## Future Phase: Volunteer Signup System
 
-Contact forms already deliver email via Cloudflare Pages + Resend. A dedicated volunteer signup system could add:
+Contact forms already store volunteer, partnership, and general inquiries as MailerLite subscribers. A dedicated volunteer signup system could add:
 
 - Workday date selection and RSVP tracking
 - Airtable or Google Sheets integration for volunteer rosters

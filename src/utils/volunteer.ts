@@ -1,6 +1,6 @@
 /**
  * Contact forms submit to /api/contact (Cloudflare Pages Function).
- * See functions/api/contact.ts and README.md for Resend setup.
+ * See functions/api/contact.ts and README.md (MailerLite subscribers).
  */
 export interface VolunteerSignup {
   name: string;

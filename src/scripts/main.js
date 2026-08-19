@@ -85,13 +85,22 @@ function initContactForms() {
           body: JSON.stringify(payload),
         });
 
-        const result = await response.json().catch(() => ({}));
+        const contentType = response.headers.get('content-type') ?? '';
+        const result = contentType.includes('application/json')
+          ? await response.json().catch(() => ({}))
+          : {};
 
         if (response.ok && result.ok) {
           status.textContent = 'Thank you — your message has been sent. We will be in touch soon.';
           status.classList.remove('text-stone-600');
           status.classList.add('text-forest-700');
           form.reset();
+        } else if (!contentType.includes('application/json')) {
+          throw new Error(
+            response.status === 404
+              ? 'Contact form is not available on this preview.'
+              : 'Unable to send message.'
+          );
         } else {
           throw new Error(result.error ?? 'Unable to send message.');
         }
