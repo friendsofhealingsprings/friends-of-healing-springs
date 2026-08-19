@@ -9,7 +9,11 @@ interface ContactPayload {
 
 interface Env {
   MAILERLITE_API_KEY?: string;
-  /** Optional: add website inquiries to a MailerLite group. Not required. */
+  /** Optional override: skip name lookup for volunteer inquiries. */
+  MAILERLITE_VOLUNTEER_GROUP_ID?: string;
+  /** Optional override: skip name lookup for partnership inquiries. */
+  MAILERLITE_PARTNERSHIP_GROUP_ID?: string;
+  /** Optional override: skip name lookup for general/website inquiries. */
   MAILERLITE_CONTACT_GROUP_ID?: string;
   /** Optional extra: also email the inquiry if all three Resend vars are set. */
   RESEND_API_KEY?: string;
@@ -21,6 +25,16 @@ const FORM_LABELS: Record<string, string> = {
   general: 'General Inquiry',
   volunteer: 'Volunteer Inquiry',
   partnership: 'Partnership Inquiry',
+};
+
+/** MailerLite group names. Created automatically on first successful submit if missing. */
+const FORM_GROUPS: Record<
+  string,
+  { name: string; envKey: keyof Pick<Env, 'MAILERLITE_VOLUNTEER_GROUP_ID' | 'MAILERLITE_PARTNERSHIP_GROUP_ID' | 'MAILERLITE_CONTACT_GROUP_ID'> }
+> = {
+  volunteer: { name: 'Volunteer Inquiries', envKey: 'MAILERLITE_VOLUNTEER_GROUP_ID' },
+  partnership: { name: 'Partnership Inquiries', envKey: 'MAILERLITE_PARTNERSHIP_GROUP_ID' },
+  general: { name: 'Website Inquiries', envKey: 'MAILERLITE_CONTACT_GROUP_ID' },
 };
 
 const MAILERLITE_API = 'https://connect.mailerlite.com/api';
@@ -140,6 +154,7 @@ async function handleContact(request: Request, env: Env): Promise<Response> {
     subject,
     message,
     label,
+    formType,
   });
 
   if (!stored.ok) {
@@ -204,10 +219,11 @@ async function storeViaMailerLite(
     subject: string;
     message: string;
     label: string;
+    formType: string;
   }
 ): Promise<{ ok: true } | { ok: false; response: Response }> {
   const receivedAt = new Date().toISOString();
-  const groupId = env.MAILERLITE_CONTACT_GROUP_ID?.trim();
+  const groupId = await resolveGroupId(apiKey, env, params.formType);
 
   await ensureInquiryFields(apiKey);
 
@@ -255,6 +271,84 @@ async function storeViaMailerLite(
       502
     ),
   };
+}
+
+function groupConfigFor(formType: string) {
+  return FORM_GROUPS[formType] ?? FORM_GROUPS.general;
+}
+
+async function resolveGroupId(apiKey: string, env: Env, formType: string): Promise<string | undefined> {
+  const config = groupConfigFor(formType);
+  const override = env[config.envKey]?.trim();
+  if (override) return override;
+
+  try {
+    return await findOrCreateGroup(apiKey, config.name);
+  } catch (err) {
+    console.error('MailerLite resolve group error:', config.name, err);
+    return undefined;
+  }
+}
+
+async function findOrCreateGroup(apiKey: string, name: string): Promise<string | undefined> {
+  const existing = await findGroupByName(apiKey, name);
+  if (existing) return existing;
+
+  const createRes = await fetch(`${MAILERLITE_API}/groups`, {
+    method: 'POST',
+    headers: mlHeaders(apiKey),
+    body: JSON.stringify({ name }),
+  });
+
+  if (createRes.ok) {
+    const payload = (await createRes.json()) as { data?: { id?: string | number } };
+    if (payload.data?.id != null) return String(payload.data.id);
+  } else {
+    const errorText = await createRes.text();
+    console.error('MailerLite create group error:', name, createRes.status, errorText);
+  }
+
+  // Concurrent first submits can race; re-list and use the existing name.
+  const retry = await findGroupByName(apiKey, name);
+  if (retry) return retry;
+
+  console.error('MailerLite find/create group failed:', name);
+  return undefined;
+}
+
+async function findGroupByName(apiKey: string, name: string): Promise<string | undefined> {
+  const params = new URLSearchParams({
+    'filter[name]': name,
+    limit: '100',
+  });
+
+  let page = 1;
+  let lastPage = 1;
+
+  do {
+    params.set('page', String(page));
+    const res = await fetch(`${MAILERLITE_API}/groups?${params.toString()}`, {
+      headers: mlHeaders(apiKey),
+    });
+
+    if (!res.ok) {
+      console.error('MailerLite list groups error:', res.status, await res.text());
+      return undefined;
+    }
+
+    const payload = (await res.json()) as {
+      data?: Array<{ id?: string | number; name?: string }>;
+      meta?: { last_page?: number };
+    };
+
+    const match = (payload.data ?? []).find((group) => group.name === name && group.id != null);
+    if (match?.id != null) return String(match.id);
+
+    lastPage = payload.meta?.last_page ?? page;
+    page += 1;
+  } while (page <= lastPage);
+
+  return undefined;
 }
 
 async function ensureInquiryFields(apiKey: string): Promise<void> {

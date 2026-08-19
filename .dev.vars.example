@@ -12,5 +12,10 @@ SITE_URL=http://localhost:8788
 MAILERLITE_API_KEY=
 # Optional: add new newsletter subscribers to a specific MailerLite group
 MAILERLITE_GROUP_ID=
-# Optional: add website inquiries to a separate MailerLite group (not required)
+# Optional overrides. If unset, contact.ts finds or creates MailerLite groups by name:
+#   volunteer   → "Volunteer Inquiries"
+#   partnership → "Partnership Inquiries"
+#   general     → "Website Inquiries"
+MAILERLITE_VOLUNTEER_GROUP_ID=
+MAILERLITE_PARTNERSHIP_GROUP_ID=
 MAILERLITE_CONTACT_GROUP_ID=
