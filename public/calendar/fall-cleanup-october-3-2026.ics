@@ -1,0 +1,34 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Friends of Healing Springs Natural Area//Fall Cleanup 2026//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VTIMEZONE
+TZID:America/Chicago
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0600
+TZOFFSETTO:-0500
+TZNAME:CDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0600
+TZNAME:CST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:fall-cleanup-2026-10-03@friendsofhealingsprings.org
+DTSTAMP:20260820T220000Z
+DTSTART;TZID=America/Chicago:20261003T090000
+DTEND;TZID=America/Chicago:20261003T160000
+SUMMARY:Fall Cleanup & Stewardship Workday
+DESCRIPTION:Join Friends of Healing Springs Natural Area for a community cleanup and stewardship workday. Meet at the Healing Springs common-area pond. Come for an hour or stay all day. Rain date: Sunday, October 4, 2026. Details: https://friendsofhealingsprings.org/news/fall-cleanup-october-3-2026/
+LOCATION:Healing Springs common-area pond, Highfill, AR
+URL:https://friendsofhealingsprings.org/news/fall-cleanup-october-3-2026/
+STATUS:CONFIRMED
+END:VEVENT
+END:VCALENDAR
