@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initGalleryFilter();
   initContactForms();
   initNewsletterForms();
+  initRsvpForms();
 });
 
 function initMobileMenu() {
@@ -168,6 +169,85 @@ function initNewsletterForms() {
         status.textContent = `${message} Please email info@friendsofhealingsprings.org directly.`;
         status.classList.remove('text-sand-200');
         status.classList.add('text-red-300');
+      } finally {
+        if (submitBtn instanceof HTMLButtonElement) {
+          submitBtn.disabled = false;
+        }
+      }
+    });
+  });
+}
+
+function selectedValues(form, name) {
+  return Array.from(form.querySelectorAll(`input[name="${name}"]:checked`))
+    .map((input) => (input instanceof HTMLInputElement ? input.value : ''))
+    .filter(Boolean);
+}
+
+function initRsvpForms() {
+  document.querySelectorAll('.rsvp-form').forEach((form) => {
+    if (!(form instanceof HTMLFormElement)) return;
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const status = form.querySelector('.rsvp-form-status');
+      const submitBtn = form.querySelector('.rsvp-form-submit');
+      if (!(status instanceof HTMLElement)) return;
+
+      const formData = new FormData(form);
+      const payload = {
+        firstName: String(formData.get('firstName') ?? '').trim(),
+        lastName: String(formData.get('lastName') ?? '').trim(),
+        email: String(formData.get('email') ?? '').trim(),
+        attending: String(formData.get('attending') ?? '').trim(),
+        participation: String(formData.get('participation') ?? '').trim(),
+        interests: selectedValues(form, 'interests'),
+        equipment: selectedValues(form, 'equipment'),
+        equipmentNotes: String(formData.get('equipmentNotes') ?? '').trim(),
+        notes: String(formData.get('notes') ?? '').trim(),
+        website: String(formData.get('website') ?? '').trim(),
+      };
+
+      status.classList.remove('hidden', 'text-red-700', 'text-forest-700');
+      status.classList.add('text-stone-600');
+      status.textContent = 'Sending…';
+
+      if (submitBtn instanceof HTMLButtonElement) {
+        submitBtn.disabled = true;
+      }
+
+      try {
+        const response = await fetch('/api/rsvp', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+        });
+
+        const contentType = response.headers.get('content-type') ?? '';
+        const result = contentType.includes('application/json')
+          ? await response.json().catch(() => ({}))
+          : {};
+
+        if (response.ok && result.ok) {
+          status.textContent = 'Thank you — we have your RSVP. See you at the pond!';
+          status.classList.remove('text-stone-600');
+          status.classList.add('text-forest-700');
+          form.reset();
+        } else if (!contentType.includes('application/json')) {
+          throw new Error(
+            response.status === 404
+              ? 'RSVP form is not available on this preview.'
+              : 'Unable to send RSVP.'
+          );
+        } else {
+          throw new Error(result.error ?? 'Unable to send RSVP.');
+        }
+      } catch (err) {
+        const message = err instanceof Error ? err.message : 'Unable to send RSVP.';
+        status.textContent = `${message} Please email info@friendsofhealingsprings.org directly.`;
+        status.classList.remove('text-stone-600');
+        status.classList.add('text-red-700');
       } finally {
         if (submitBtn instanceof HTMLButtonElement) {
           submitBtn.disabled = false;

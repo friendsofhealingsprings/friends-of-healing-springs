@@ -16,6 +16,8 @@ MAILERLITE_GROUP_ID=
 #   volunteer   → "Volunteer Inquiries"
 #   partnership → "Partnership Inquiries"
 #   general     → "Website Inquiries"
+# RSVP form finds or creates "Fall Cleanup RSVPs" unless overridden:
+MAILERLITE_RSVP_GROUP_ID=
 MAILERLITE_VOLUNTEER_GROUP_ID=
 MAILERLITE_PARTNERSHIP_GROUP_ID=
 MAILERLITE_CONTACT_GROUP_ID=

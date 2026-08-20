@@ -6,8 +6,13 @@ import PostPreview from '../../components/PostPreview.astro';
 import { images } from '../../data/images';
 import { getCollection } from 'astro:content';
 import { sortPostsByDateDesc } from '../../utils/posts';
+import { fallCleanup2026 } from '../../data/events';
+import EventCard from '../../components/EventCard.astro';
+import SectionHeading from '../../components/SectionHeading.astro';
 
-const posts = sortPostsByDateDesc(await getCollection('posts', ({ data }) => !data.draft));
+const posts = sortPostsByDateDesc(await getCollection('posts', ({ data }) => !data.draft)).filter(
+  (post) => post.slug !== fallCleanup2026.slug
+);
 ---
 
 <BaseLayout
@@ -22,6 +27,10 @@ const posts = sortPostsByDateDesc(await getCollection('posts', ({ data }) => !da
   />
 
   <Section background="white">
+    <SectionHeading title="Upcoming" />
+    <div class="mb-12">
+      <EventCard event={fallCleanup2026} featured />
+    </div>
     {
       posts.length > 0 ? (
         <div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">

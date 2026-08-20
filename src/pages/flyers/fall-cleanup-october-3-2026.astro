@@ -1,0 +1,162 @@
+---
+import { fallCleanup2026 } from '../../data/events';
+import { site } from '../../data/site';
+
+const eventUrl = new URL(fallCleanup2026.rsvpHref, site.url).href;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fall Cleanup Flyer | Friends of Healing Springs Natural Area</title>
+    <meta name="description" content={fallCleanup2026.description} />
+    <link rel="canonical" href={new URL(fallCleanup2026.flyerHref, site.url).href} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --forest: #2f5d50;
+        --forest-dark: #244740;
+        --teal: #2a9d8f;
+        --water: #1f6f8b;
+        --base: #f7f6f2;
+        --sand: #eae6dc;
+        --ozark: #4c6b3c;
+      }
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        background: #e8e6e2;
+        color: var(--forest-dark);
+        font-family: Inter, system-ui, sans-serif;
+      }
+      .toolbar {
+        max-width: 8.5in;
+        margin: 1rem auto;
+        display: flex;
+        gap: 0.75rem;
+        justify-content: center;
+      }
+      .toolbar a, .toolbar button {
+        border: 0;
+        border-radius: 8px;
+        padding: 0.65rem 1rem;
+        font: 600 0.9rem Inter, sans-serif;
+        cursor: pointer;
+        text-decoration: none;
+      }
+      .toolbar .print { background: var(--water); color: #fff; }
+      .toolbar .back { background: #fff; color: var(--forest-dark); }
+      .sheet {
+        width: 8.5in;
+        min-height: 11in;
+        margin: 0 auto 2rem;
+        background: var(--base);
+        padding: 0.55in 0.6in 0.5in;
+        display: flex;
+        flex-direction: column;
+        gap: 0.35in;
+      }
+      .brand {
+        letter-spacing: 0.22em;
+        font-size: 0.72rem;
+        font-weight: 600;
+        color: var(--forest);
+        text-transform: uppercase;
+      }
+      h1 {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-size: 2.15rem;
+        line-height: 1.15;
+        margin: 0.15in 0 0;
+        color: var(--forest-dark);
+      }
+      .when {
+        font-size: 1.15rem;
+        font-weight: 600;
+        color: var(--forest);
+        margin-top: 0.12in;
+      }
+      .photo {
+        width: 100%;
+        height: 2.6in;
+        object-fit: cover;
+        border-radius: 8px;
+      }
+      .welcome {
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: var(--teal);
+        margin: 0;
+      }
+      ul { margin: 0.1in 0 0; padding-left: 1.1rem; }
+      li { margin: 0.08in 0; }
+      .rsvp-row {
+        display: grid;
+        grid-template-columns: 1.35in 1fr;
+        gap: 0.3in;
+        align-items: center;
+        background: #fff;
+        border: 1px solid #d4d0c9;
+        border-radius: 8px;
+        padding: 0.22in;
+      }
+      .qr { width: 1.35in; height: 1.35in; }
+      .url { font-size: 0.78rem; color: #5e5951; word-break: break-all; }
+      @media print {
+        body { background: #fff; }
+        .toolbar { display: none; }
+        .sheet { margin: 0; box-shadow: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="toolbar">
+      <button class="print" type="button" onclick="window.print()">Print flyer</button>
+      <a class="back" href={fallCleanup2026.href}>Back to event</a>
+      <a class="back" href="/brand/flyers/fall-cleanup-october-3-2026.png" download>Download PNG</a>
+    </div>
+    <article class="sheet">
+      <header>
+        <p class="brand">Friends of Healing Springs Natural Area</p>
+        <h1>Fall Cleanup &amp; Stewardship Workday</h1>
+        <p class="when">{fallCleanup2026.dateLabel}<br />{fallCleanup2026.timeLabel}</p>
+        <p class="when" style="font-size:1rem;font-weight:600;">Meet at the {fallCleanup2026.locationDisplay}</p>
+        <p style="margin:0.1in 0 0;font-weight:600;">Rain date: Sunday, October 4</p>
+      </header>
+      <img class="photo" src={fallCleanup2026.image} alt={fallCleanup2026.imageAlt} />
+      <p class="welcome">Everyone is welcome!</p>
+      <p style="margin:0;line-height:1.45;">
+        Help us clean up and care for Healing Springs Natural Area. Come for an hour or stay all day.
+      </p>
+      <div>
+        <strong>Possible activities include:</strong>
+        <ul>
+          <li>Cleanup and debris removal</li>
+          <li>Trail stewardship</li>
+          <li>Vegetation trimming</li>
+          <li>Other hands-on stewardship projects</li>
+        </ul>
+      </div>
+      <p style="margin:0;font-size:1.1rem;font-weight:700;color:var(--forest-dark);">
+        Come for an hour or stay all day!
+      </p>
+      <div class="rsvp-row">
+        <img class="qr" src="/brand/flyers/fall-cleanup-qr.svg" alt="QR code linking to online RSVP" />
+        <div>
+          <p style="margin:0;font-weight:700;font-size:1.05rem;">RSVP online</p>
+          <p style="margin:0.08in 0 0;line-height:1.4;">
+            Scan the code or visit the event page to let us know you're coming.
+          </p>
+          <p class="url">{eventUrl}</p>
+        </div>
+      </div>
+    </article>
+  </body>
+</html>

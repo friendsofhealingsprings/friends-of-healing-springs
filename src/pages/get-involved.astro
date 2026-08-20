@@ -5,7 +5,9 @@ import Section from '../components/Section.astro';
 import SectionHeading from '../components/SectionHeading.astro';
 import ContactForm from '../components/ContactForm.astro';
 import Button from '../components/Button.astro';
+import EventCard from '../components/EventCard.astro';
 import { images } from '../data/images';
+import { fallCleanup2026 } from '../data/events';
 ---
 
 <BaseLayout
@@ -18,6 +20,14 @@ import { images } from '../data/images';
     image={images.volunteerWork}
     imageAlt="Volunteers at a stewardship workday"
   />
+
+  <Section background="spring">
+    <SectionHeading
+      title="Upcoming Workday"
+      subtitle="Everyone is welcome — come for an hour or stay the day."
+    />
+    <EventCard event={fallCleanup2026} featured />
+  </Section>
 
   <Section background="white">
     <SectionHeading

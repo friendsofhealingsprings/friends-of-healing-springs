@@ -11,8 +11,12 @@ import { images } from '../data/images';
 import { mission } from '../data/site';
 import { conservationPriorities } from '../data/content';
 import { sortPostsByDateDesc } from '../utils/posts';
+import { fallCleanup2026 } from '../data/events';
+import EventCard from '../components/EventCard.astro';
 
-const posts = sortPostsByDateDesc(await getCollection('posts', ({ data }) => !data.draft)).slice(0, 3);
+const posts = sortPostsByDateDesc(await getCollection('posts', ({ data }) => !data.draft))
+  .filter((post) => post.slug !== fallCleanup2026.slug)
+  .slice(0, 3);
 ---
 
 <BaseLayout title="Home">
@@ -87,13 +91,16 @@ const posts = sortPostsByDateDesc(await getCollection('posts', ({ data }) => !da
     </div>
   </Section>
 
-  <!-- Latest updates -->
+  <!-- Upcoming event + latest updates -->
   <Section background="spring">
     <SectionHeading
       title="Latest Updates"
       subtitle="News from our board, partners, and volunteer community."
       centered
     />
+    <div class="mb-10">
+      <EventCard event={fallCleanup2026} featured />
+    </div>
     <div class="grid gap-8 md:grid-cols-3">
       {
         posts.map((post) => (
@@ -108,8 +115,9 @@ const posts = sortPostsByDateDesc(await getCollection('posts', ({ data }) => !da
         ))
       }
     </div>
-    <div class="mt-10 text-center">
+    <div class="mt-10 flex flex-wrap justify-center gap-4">
       <Button href="/news/" variant="primary">View All Updates</Button>
+      <Button href="/events/" variant="outline">Upcoming Events</Button>
     </div>
   </Section>
 

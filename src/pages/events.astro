@@ -1,0 +1,31 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHero from '../components/PageHero.astro';
+import Section from '../components/Section.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import EventCard from '../components/EventCard.astro';
+import { images } from '../data/images';
+import { upcomingEvents } from '../data/events';
+---
+
+<BaseLayout
+  title="Events"
+  description="Upcoming community workdays and stewardship events with Friends of Healing Springs Natural Area."
+>
+  <PageHero
+    title="Events"
+    subtitle="Join us for community cleanup, trail stewardship, and hands-on care of Healing Springs Natural Area."
+    image={images.volunteerWork}
+    imageAlt="Volunteers at a stewardship workday"
+  />
+
+  <Section background="white">
+    <SectionHeading
+      title="Upcoming"
+      subtitle="Everyone is welcome. Come for an hour or stay for the day."
+    />
+    <div class="space-y-8">
+      {upcomingEvents.map((event) => <EventCard event={event} featured />)}
+    </div>
+  </Section>
+</BaseLayout>

@@ -1,0 +1,37 @@
+---
+import Button from './Button.astro';
+import type { UpcomingEvent } from '../data/events';
+
+interface Props {
+  event: UpcomingEvent;
+  featured?: boolean;
+}
+
+const { event, featured = false } = Astro.props;
+---
+
+<article class:list={['brand-card overflow-hidden', featured && 'md:grid md:grid-cols-2']}>
+  <a href={event.href} class:list={['block overflow-hidden bg-sand-100', featured ? 'aspect-[16/10] md:aspect-auto md:min-h-[16rem]' : 'aspect-[16/9]']}>
+    <img
+      src={event.image}
+      alt={event.imageAlt}
+      class="h-full w-full object-cover"
+      loading={featured ? 'eager' : 'lazy'}
+    />
+  </a>
+  <div class="p-6 md:p-8">
+    <p class="text-sm font-semibold uppercase tracking-wider text-water-700">Upcoming workday</p>
+    <h3 class="mt-2 font-serif text-2xl font-semibold text-forest-800">
+      <a href={event.href} class="no-underline hover:text-water-700">{event.shortTitle}</a>
+    </h3>
+    <p class="mt-3 text-base font-medium text-forest-800">{event.dateLabel}</p>
+    <p class="text-sm text-stone-600">{event.timeLabel}</p>
+    <p class="mt-1 text-sm text-stone-600">{event.locationDisplay}</p>
+    <p class="mt-2 text-sm font-medium text-forest-700">Rain date: {event.rainDateLabel}</p>
+    <p class="mt-4 text-sm leading-relaxed text-stone-600">{event.description}</p>
+    <div class="mt-6 flex flex-wrap gap-3">
+      <Button href={event.rsvpHref} variant="primary">Learn More &amp; RSVP</Button>
+      <Button href={event.href} variant="outline">Event details</Button>
+    </div>
+  </div>
+</article>

@@ -10,6 +10,8 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  ogTitle?: string;
+  jsonLd?: Record<string, unknown> | Record<string, unknown>[];
   noindex?: boolean;
 }
 
@@ -17,12 +19,17 @@ const {
   title,
   description = site.description,
   image = defaultOgImage,
+  ogTitle,
+  jsonLd,
   noindex = false,
 } = Astro.props;
 
 const fullTitle = pageTitle(title, site.name);
+const shareTitle = ogTitle ?? fullTitle;
 const canonical = canonicalUrl(Astro.url.pathname, site.url);
 const ogImage = new URL(image, site.url).href;
+
+const jsonLdItems = jsonLd ? (Array.isArray(jsonLd) ? jsonLd : [jsonLd]) : [];
 
 // Organization structured data (rendered on the homepage per Google guidance).
 // `sameAs` associates our official social profiles with the organization.
@@ -62,11 +69,12 @@ const organizationSchema = {
     {noindex && <meta name="robots" content="noindex, nofollow" />}
 
     {isHome && <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)} />}
+    {jsonLdItems.map((item) => <script type="application/ld+json" set:html={JSON.stringify(item)} />)}
 
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content={site.name} />
-    <meta property="og:title" content={fullTitle} />
+    <meta property="og:title" content={shareTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
@@ -74,7 +82,7 @@ const organizationSchema = {
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:title" content={shareTitle} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={ogImage} />
 

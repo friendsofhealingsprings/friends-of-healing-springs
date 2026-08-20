@@ -11,6 +11,16 @@ const posts = defineCollection({
     image: z.string().optional(),
     imageAlt: z.string().optional(),
     draft: z.boolean().default(false),
+    /** When set, this post is treated as a public event. */
+    event: z
+      .object({
+        start: z.string(),
+        end: z.string(),
+        location: z.string(),
+        rainDate: z.string().optional(),
+      })
+      .optional(),
+    ogTitle: z.string().optional(),
   }),
 });
 

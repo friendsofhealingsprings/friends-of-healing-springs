@@ -1,8 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Section from '../../components/Section.astro';
+import Button from '../../components/Button.astro';
+import RsvpForm from '../../components/RsvpForm.astro';
 import { getCollection } from 'astro:content';
 import { contentDateIso, formatContentDate } from '../../utils/date';
+import { fallCleanup2026, eventJsonLd } from '../../data/events';
 
 export async function getStaticPaths() {
   const posts = await getCollection('posts', ({ data }) => !data.draft);
@@ -16,9 +19,17 @@ const { post } = Astro.props;
 const { Content } = await post.render();
 
 const formattedDate = formatContentDate(post.data.pubDate);
+const isFallCleanup = post.slug === fallCleanup2026.slug;
+const event = post.data.event;
 ---
 
-<BaseLayout title={post.data.title} description={post.data.description} image={post.data.image}>
+<BaseLayout
+  title={isFallCleanup ? fallCleanup2026.shortTitle : post.data.title}
+  description={post.data.description}
+  image={post.data.image}
+  ogTitle={post.data.ogTitle}
+  jsonLd={isFallCleanup ? (eventJsonLd(fallCleanup2026) as Record<string, unknown>) : undefined}
+>
   <article>
     {
       post.data.image && (
@@ -46,9 +57,35 @@ const formattedDate = formatContentDate(post.data.pubDate);
           <p class="mt-4 text-lg text-stone-600">{post.data.description}</p>
           <p class="mt-2 text-sm text-stone-500">By {post.data.author}</p>
         </header>
+
+        {
+          event && (
+            <div class="mt-8 rounded-brand border border-stone-200 bg-sand-50 p-6">
+              <p class="font-serif text-xl font-semibold text-forest-800">
+                {isFallCleanup ? fallCleanup2026.dateLabel : post.data.title}
+              </p>
+              {isFallCleanup && <p class="mt-1 text-stone-700">{fallCleanup2026.timeLabel}</p>}
+              <p class="mt-1 text-stone-700">{event.location}</p>
+              {event.rainDate && (
+                <p class="mt-3 font-medium text-forest-800">Rain date: {event.rainDate}</p>
+              )}
+              <div class="mt-5 flex flex-wrap gap-3">
+                {isFallCleanup && <Button href="#rsvp" variant="primary">RSVP</Button>}
+                <Button href="/events/" variant="outline">All events</Button>
+              </div>
+            </div>
+          )
+        }
+
         <div class="prose-custom mt-10">
           <Content />
         </div>
+
+        {isFallCleanup && (
+          <div class="mt-12">
+            <RsvpForm />
+          </div>
+        )}
       </div>
     </Section>
   </article>
