@@ -151,11 +151,3 @@ export const governanceDocuments: GovernanceDocument[] = [
       'Friends of Healing Springs Natural Area, Inc. is committed to ensuring that decisions are made in the best interests of our mission and the natural area we serve. Our Conflict of Interest Policy establishes procedures for identifying, disclosing, and appropriately managing potential conflicts.',
   },
 ];
-
-export interface MeetingSummary {
-  date: string;
-  title: string;
-  summary: string;
-}
-
-export const meetingSummaries: MeetingSummary[] = [];

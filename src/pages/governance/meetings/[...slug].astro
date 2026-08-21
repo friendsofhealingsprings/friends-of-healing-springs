@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import Section from '../../../components/Section.astro';
+import { getCollection } from 'astro:content';
+import { contentDateIso, formatContentDate } from '../../../utils/date';
+
+export async function getStaticPaths() {
+  const meetings = await getCollection('meetings', ({ data }) => !data.draft);
+  return meetings.map((meeting) => ({
+    params: { slug: meeting.slug },
+    props: { meeting },
+  }));
+}
+
+const { meeting } = Astro.props;
+const { Content } = await meeting.render();
+const formattedDate = formatContentDate(meeting.data.pubDate);
+---
+
+<BaseLayout title={meeting.data.title} description={meeting.data.description} image={meeting.data.image}>
+  <article>
+    <Section background="white" padding="md">
+      <div class="mx-auto max-w-3xl">
+        <a href="/governance/#meeting-summaries" class="text-sm font-medium text-water-700 no-underline hover:text-water-800">
+          ← Back to Meeting Summaries
+        </a>
+        <header class="mt-6">
+          <p class="text-sm font-semibold uppercase tracking-wider text-water-700">Board Meeting Summary</p>
+          <time datetime={contentDateIso(meeting.data.pubDate)} class="mt-2 block text-sm text-stone-500">
+            {formattedDate}
+          </time>
+          <h1 class="mt-2 font-serif text-4xl font-semibold text-forest-800">{meeting.data.title}</h1>
+          <p class="mt-4 text-lg text-stone-600">{meeting.data.description}</p>
+          <p class="mt-2 text-sm text-stone-500">By {meeting.data.author}</p>
+        </header>
+        <div class="prose-custom mt-10">
+          <Content />
+        </div>
+      </div>
+    </Section>
+  </article>
+</BaseLayout>

@@ -8,9 +8,12 @@ import {
   governanceDocuments,
   governanceDocumentsPath,
   boardMembers,
-  meetingSummaries,
 } from '../data/content';
-import { contentDateIso, formatContentDateString, parseContentDate } from '../utils/date';
+import { getCollection } from 'astro:content';
+import { contentDateIso, formatContentDate } from '../utils/date';
+import { sortMeetingsByDateDesc } from '../utils/posts';
+
+const meetings = sortMeetingsByDateDesc(await getCollection('meetings', ({ data }) => !data.draft));
 
 const accountabilityCommitments = [
   'Using donated resources responsibly and in support of our mission',
@@ -110,18 +113,28 @@ const accountabilityCommitments = [
     </div>
   </Section>
 
-  <Section background="white">
+  <Section id="meeting-summaries" background="white">
     <SectionHeading title="Meeting Summaries" subtitle="Public summaries of board meetings and organizational decisions." />
     <div class="space-y-6">
       {
-        meetingSummaries.length > 0 ? (
-          meetingSummaries.map((meeting) => (
+        meetings.length > 0 ? (
+          meetings.map((meeting) => (
             <article class="brand-card p-6">
-              <time datetime={contentDateIso(parseContentDate(meeting.date))} class="text-sm text-stone-500">
-                {formatContentDateString(meeting.date)}
+              <time datetime={contentDateIso(meeting.data.pubDate)} class="text-sm text-stone-500">
+                {formatContentDate(meeting.data.pubDate)}
               </time>
-              <h3 class="mt-1 font-serif text-lg font-semibold text-forest-800">{meeting.title}</h3>
-              <p class="mt-2 text-stone-600">{meeting.summary}</p>
+              <h3 class="mt-1 font-serif text-lg font-semibold text-forest-800">
+                <a href={`/governance/meetings/${meeting.slug}/`} class="no-underline hover:text-water-700">
+                  {meeting.data.title}
+                </a>
+              </h3>
+              <p class="mt-2 text-stone-600">{meeting.data.description}</p>
+              <a
+                href={`/governance/meetings/${meeting.slug}/`}
+                class="mt-4 inline-flex items-center text-sm font-semibold text-water-700 no-underline hover:text-water-800"
+              >
+                Read the full summary
+              </a>
             </article>
           ))
         ) : (
