@@ -1,0 +1,6 @@
+# Tracked QR / print destinations.
+# Change the target path to retarget a printed code without reprinting.
+# 302 so scanners and analytics see the campaign URL first.
+
+/go/poa-social   /?utm_source=print&utm_medium=flyer&utm_campaign=poa-social-20260822  302
+/go/poa-social/  /?utm_source=print&utm_medium=flyer&utm_campaign=poa-social-20260822  302
